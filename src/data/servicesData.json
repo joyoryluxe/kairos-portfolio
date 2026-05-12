@@ -1,0 +1,151 @@
+{
+  "maternity-photography": {
+    "id": "maternity-photography",
+    "title": "Maternity Stories",
+    "heroImage": "/mat4.webp",
+    "description": "The best time to schedule the maternity shoot is between 28-34 weeks.",
+    "sections": [
+      {
+        "title": "Elegant Studio Sessions",
+        "images": [
+          "/mat1.webp",
+          "/mat2.webp",
+          "/mat3.webp",
+          "/mat4.webp",
+          "/mat1.webp",
+          "/mat2.webp"
+        ]
+      },
+      {
+        "title": "Sunlit Outdoor Stories",
+        "images": [
+          "/mat4.webp",
+          "/mat2.webp",
+          "/mat3.webp"
+        ]
+      }
+    ]
+  },
+  "baby-photography": {
+    "id": "baby-photography",
+    "title": "Baby Photoshoot",
+    "heroImage": "/small1.webp",
+    "description": "Capture the first moments of your little one in a safe and comfortable environment.",
+    "sections": [
+      {
+        "title": "Newborn Magic (0-3 Months)",
+        "images": [
+          "/small.webp",
+          "/small1.webp",
+          "/small2.webp",
+          "/small3.webp",
+          "/small4.webp",
+          "/small5.webp",
+          "/small.webp",
+          "/small1.webp",
+          "/small2.webp",
+          "/small3.webp",
+          "/small4.webp",
+          "/small5.webp"
+        ]
+      },
+      {
+        "title": "Little Smiles (3-6 Months)",
+        "images": [
+          "/small.webp",
+          "/small1.webp",
+          "/small2.webp"
+        ]
+      },
+      {
+        "title": "Playful Moments (6+ Months)",
+        "images": [
+          "/small3.webp",
+          "/small4.webp",
+          "/small5.webp"
+        ]
+      }
+    ]
+  },
+  "product-photography": {
+    "id": "product-photography",
+    "title": "Product Stories",
+    "heroImage": "/product1.webp",
+    "description": "Showcase your products with high-quality visuals designed for e-commerce, branding, and marketing.",
+    "sections": [
+      {
+        "title": "Studio Product Sessions",
+        "images": [
+          "/product1.webp",
+          "/product2.webp",
+          "/product3.webp",
+          "/product4.webp",
+          "/product2.webp",
+          "/product3.webp"
+        ]
+      },
+      {
+        "title": "Lifestyle Product Stories",
+        "images": [
+          "/product4.webp",
+          "/product2.webp",
+          "/product3.webp"
+        ]
+      }
+    ]
+  },
+  "interior-photography": {
+    "id": "interior-photography",
+    "title": "Interior Stories",
+    "heroImage": "/interior.webp",
+    "description": "Capture the beauty of your spaces with elegant interior and architectural photography.",
+    "sections": [
+      {
+        "title": "Residential Spaces",
+        "images": [
+          "/interior.webp",
+          "/interior2.webp",
+          "/interior3.webp",
+          "/interior.webp",
+          "/interior2.webp",
+          "/interior3.webp"
+        ]
+      },
+      {
+        "title": "Commercial Spaces",
+        "images": [
+          "/interior.webp",
+          "/interior2.webp",
+          "/interior3.webp"
+        ]
+      }
+    ]
+  },
+  "birthdays-&-events": {
+    "id": "birthdays-&-events",
+    "title": "Birthdays & Events",
+    "heroImage": "/birthday.webp",
+    "description": "Aesthetic shots for your social media and personal brand.",
+    "sections": [
+      {
+        "title": "The Big Day Celebration",
+        "images": [
+          "/birth1.webp",
+          "/birth2.webp",
+          "/birth3.webp",
+          "/birth1.webp",
+          "/birth2.webp",
+          "/birth3.webp"
+        ]
+      },
+      {
+        "title": "Joyful & Candid Moments",
+        "images": [
+          "/birth1.webp",
+          "/birth2.webp",
+          "/birth3.webp"
+        ]
+      }
+    ]
+  }
+}

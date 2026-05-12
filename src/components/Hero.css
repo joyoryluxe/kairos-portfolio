@@ -1,0 +1,247 @@
+.hero {
+  padding: 0rem 0 2rem 0;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.hero-container {
+  width: 100%;
+  max-width: 100%;
+  /* Ensure it doesn't get constrained if we want full width feel */
+}
+
+.hero-image-wrapper {
+  position: relative;
+  width: 100%;
+  /* Large aspect ratio, somewhat like 16:9 or taller depending on screen */
+  height: 120vh;
+  min-height: 650px;
+  max-height: 1000px;
+  border-top-left-radius: 50px;
+  border-top-right-radius: 50px;
+  /* Big rounded corners as seen in the design */
+  overflow: hidden;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.hero-image-wrapper picture {
+  display: contents;
+}
+
+.hero-background-image {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 0;
+}
+
+/* Dark gradient overlay to make text readable */
+.hero-overlay {
+  /* position: absolute; */
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+
+  z-index: 1;
+  pointer-events: none;
+}
+
+.hero-content {
+  position: relative;
+  z-index: 2;
+  text-align: center;
+  color: var(--text-light);
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  /* Centered vertically */
+  align-items: center;
+  padding: 4rem 2rem;
+  gap: 3rem;
+  /* Space between elements */
+}
+
+.hero-spacer {
+  height: 0;
+  /* Just used for space-between centering */
+}
+
+.hero-title {
+  font-family: var(--font-heading);
+  font-size: clamp(2rem, 4vw, 3.5rem);
+  font-weight: 400;
+  line-height: 1.2;
+  max-width: 900px;
+  text-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+.hero-bottom-text {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  /* Light spacing between subtitle and hashtag */
+  margin-bottom: 2rem;
+}
+
+.hero-subtitle {
+  font-family: var(--font-body);
+  font-size: 1rem;
+  font-weight: 500;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.hero-hashtag {
+  font-family: var(--font-body);
+  font-size: 1.1rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+
+  .hero-image-wrapper {
+    height: auto;
+    min-height: unset;
+    max-height: 90vh;
+    border-radius: 30px;
+  }
+
+  .hero-background-image {
+    position: relative;
+    width: 100%;
+    height: auto;
+    display: block;
+    object-fit: contain;
+    /* Ensure full image is visible */
+  }
+
+  .hero-overlay {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+  }
+
+  .hero-content {
+    position: absolute;
+    inset: 0;
+    padding: 2rem 1.5rem;
+    gap: 1.5rem;
+    margin-top: 0px;
+    justify-content: center;
+    z-index: 2;
+  }
+
+  .hero-title {
+    font-size: 1.5rem;
+    max-width: 100%;
+    margin-top: 0;
+    text-align: center;
+  }
+
+  .hero-subtitle {
+    font-size: 0.85rem;
+    text-align: center;
+  }
+
+  .hero-hashtag {
+    font-size: 0.95rem;
+    text-align: center;
+  }
+
+  .hero-book-btn {
+    padding: 0.8rem 1.8rem;
+    font-size: 0.85rem;
+    letter-spacing: 1px;
+    gap: 0.8rem;
+  }
+
+  .hero-book-btn span {
+    padding-right: 5px;
+    padding-left: 5px;
+    margin-right: 5px;
+    margin-left: 5px;
+    font-size: 0.65rem;
+
+  }
+}
+
+.hero-book-btn {
+  display: flex;
+  align-items: center;
+  gap: 1.2rem;
+  background-color: transparent;
+  color: #ffffff;
+  border: 1.5px solid #ffffff;
+  padding: 1rem 2.5rem;
+  font-family: var(--font-body);
+  font-size: 1rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  cursor: pointer;
+  transition: all 0.5s cubic-bezier(0.19, 1, 0.22, 1);
+  position: relative;
+  overflow: hidden;
+  border-radius: 50px;
+  backdrop-filter: blur(5px);
+}
+
+.hero-book-btn span {
+  position: relative;
+  z-index: 2;
+}
+
+.hero-book-btn .arrow-icon {
+  width: 20px;
+  height: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.5s cubic-bezier(0.19, 1, 0.22, 1);
+  z-index: 2;
+}
+
+.hero-book-btn svg {
+  width: 100%;
+  height: 100%;
+  stroke: currentColor;
+}
+
+.hero-book-btn::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 0;
+  height: 100%;
+  background-color: #ffffff;
+  transition: all 0.5s cubic-bezier(0.19, 1, 0.22, 1);
+  z-index: 1;
+}
+
+.hero-book-btn:hover {
+  color: var(--primary-color);
+  gap: 2rem;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+}
+
+.hero-book-btn:hover::before {
+  width: 100%;
+}
+
+.hero-book-btn:hover .arrow-icon {
+  transform: translateX(8px);
+}

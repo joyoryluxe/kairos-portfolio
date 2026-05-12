@@ -1,0 +1,213 @@
+{
+  "baby-photography": {
+    "id": "baby-photography",
+    "title": "Baby Photoshoot",
+    "pageTitle": "Baby Photoshoot",
+    "subtitle": "The Art of Newborn Storytelling",
+    "heroImage": "/small1.webp",
+    "cardImage": "/small1.webp",
+    "description": "Before they grow, before they change, capture the magic of their first few days. At Kairos Studio, we believe your baby's first portrait is more than a photo - it is a legacy. We specialize in the art of 'the opportune moment,' ensuring that every tiny yawn, curled toe, and peaceful breath is preserved in a safe, warm, and aesthetic environment.",
+    "packages": [
+      {
+        "name": "ESSENTIAL",
+        "features": [
+          "1 Unique Setup",
+          "5 High-Resolution Edited Photos",
+          "30 - 45 Minutes Approx Duration"
+        ],
+        "price": "Rs 4500"
+      },
+      {
+        "name": "CLASSIC",
+        "features": [
+          "2 Unique Setup",
+          "8 High-Resolution Edited Photos",
+          "60 - 70 Minutes Approx Duration"
+        ],
+        "price": "Rs 6500"
+      },
+      {
+        "name": "COLLECTION",
+        "features": [
+          "2 Unique Setup",
+          "12 High-Resolution Edited Photos",
+          "60 - 70 Minutes Approx Duration",
+          "8 X 12 Inch Photo Album"
+        ],
+        "price": "Rs 9000"
+      },
+      {
+        "name": "SIGNATURE",
+        "features": [
+          "2 Unique Setup + Family",
+          "15 High-Resolution Edited Photos",
+          "2.5 Hrs Approx Duration",
+          "8 X 12 Inch Photo Album"
+        ],
+        "price": "Rs 11500"
+      },
+      {
+        "name": "EXCLUSIVE",
+        "features": [
+          "3 Unique Setup + Family + Detailed child close up",
+          "20 High-Resolution Edited Photos",
+          "4 Hrs Approx Duration",
+          "10 X 12 Inch Photo Album"
+        ],
+        "price": "Rs 14500"
+      },
+      {
+        "name": "LEGACY",
+        "features": [
+          "3 Unique Setup + Family + Detailed child close up",
+          "1 Lifestyle Setup",
+          "30 High-Resolution Edited Photos",
+          "4 Hrs Approx Duration",
+          "12 X 14 Inch Photo Album"
+        ],
+        "price": "Rs 17000"
+      }
+    ],
+    "addOns": [
+      {
+        "name": "Cinematic Reel: A 30-second video",
+        "price": "Rs 2500"
+      },
+      {
+        "name": "Extra Person Charge: Include more family members in the frame!",
+        "price": "Rs 500 per person"
+      },
+      {
+        "name": "Urgent Delivery: Get your photos in 48 hours",
+        "price": "Rs 2,000"
+      },
+      {
+        "name": "Additional Setups: Add an extra theme in any package",
+        "price": "Rs 3,000"
+      },
+      {
+        "name": "Add a luxurious dress for the mother, there will be an additional charge",
+        "price": "Rs 2000"
+      },
+      {
+        "name": "Premium Edited Photos: Additional high-quality edited images",
+        "price": "Rs 500 per image"
+      }
+    ],
+    "notes": [
+      "The best time for a newborn session is between 7 to 45 days after birth. This is when babies sleep most deeply and retain their natural 'curl' for those sweet poses.",
+      "At Kairos Studio, your baby's health is our priority. We use hospital-grade sanitization on all props, fabrics, and surfaces before every session.",
+      "Our South Bopal studio is kept at a cozy temperature (24-28°C) to keep your baby comfortable while unclothed. We recommend parents wear light, breathable layers.",
+      "We never rush. We allow plenty of time for feeding, diaper changes, and soothing. A typical session is guided entirely by your baby's needs.",
+      "We recommend keeping the baby awake for 1-2 hours before the session and giving them a full feeding right before you arrive to ensure a \"milk coma\" for the photos.",
+      "For family portraits, we suggest wearing solid, neutral tones (beige, white, grey, or soft pastels). Avoid heavy patterns to keep the focus on the baby.",
+      "A 50% non-refundable advance is required to secure your slot. Since newborn arrival dates can be unpredictable, we pencil in your due date and finalize the shoot day once the baby is born.",
+      "To maintain our professional standards and safety protocols, the use of personal cameras or professional outside photographers is not permitted during the session."
+    ]
+  },
+  "maternity-photography": {
+    "id": "maternity-photography",
+    "title": "Maternity Shoot",
+    "pageTitle": "Maternity Photoshoot",
+    "subtitle": "Maternity Photoshoot",
+    "heroImage": "/mat4.webp",
+    "cardImage": "/mat1.webp",
+    "description": "Capture the magic of motherhood with our professional maternity photoshoot. We believe every pregnancy is a beautiful journey that deserves to be documented in a timeless and aesthetic way. Our sessions are designed to make you feel comfortable, beautiful, and empowered as you prepare to welcome your new little one.",
+    "packages": [
+      {
+        "name": "ESSENTIAL",
+        "features": [
+          "1 Unique Setup",
+          "5 High-Resolution Edited Photos",
+          "30 - 45 Minutes Approx Duration"
+        ],
+        "price": "Rs 4500"
+      },
+      {
+        "name": "CLASSIC",
+        "features": [
+          "2 Unique Setup",
+          "8 High-Resolution Edited Photos",
+          "60 - 70 Minutes Approx Duration"
+        ],
+        "price": "Rs 6500"
+      },
+      {
+        "name": "COLLECTION",
+        "features": [
+          "2 Unique Setup",
+          "12 High-Resolution Edited Photos",
+          "60 - 70 Minutes Approx Duration",
+          "8 X 12 Inch Photo Album"
+        ],
+        "price": "Rs 9000"
+      },
+      {
+        "name": "SIGNATURE",
+        "features": [
+          "2 Unique Setup + Family",
+          "15 High-Resolution Edited Photos",
+          "2.5 Hrs Approx Duration",
+          "8 X 12 Inch Photo Album"
+        ],
+        "price": "Rs 11500"
+      },
+      {
+        "name": "EXCLUSIVE",
+        "features": [
+          "3 Unique Setup + Family + Detailed child close up",
+          "20 High-Resolution Edited Photos",
+          "4 Hrs Approx Duration",
+          "10 X 12 Inch Photo Album"
+        ],
+        "price": "Rs 14500"
+      },
+      {
+        "name": "LEGACY",
+        "features": [
+          "3 Unique Setup + Family + Detailed child close up",
+          "1 Lifestyle Setup",
+          "30 High-Resolution Edited Photos",
+          "4 Hrs Approx Duration",
+          "12 X 14 Inch Photo Album"
+        ],
+        "price": "Rs 17000"
+      }
+    ],
+    "addOns": [
+      {
+        "name": "Cinematic Reel: A 30-second video",
+        "price": "Rs 2500"
+      },
+      {
+        "name": "Extra Person Charge: Include more family members in the frame!",
+        "price": "Rs 500 per person"
+      },
+      {
+        "name": "Urgent Delivery: Get your photos in 48 hours",
+        "price": "Rs 2,000"
+      },
+      {
+        "name": "Additional Setups: Add an extra theme in any package",
+        "price": "Rs 3,000"
+      },
+      {
+        "name": "Add a luxurious dress for the mother, there will be an additional charge",
+        "price": "Rs 2000"
+      },
+      {
+        "name": "Premium Edited Photos: Additional high-quality edited images",
+        "price": "Rs 500 per image"
+      }
+    ],
+    "notes": [
+      "The best time for a maternity session is between 28 to 34 weeks when your belly is nicely rounded but you still feel comfortable enough to move around.",
+      "At Kairos Studio, we provide a range of beautiful maternity gowns and fabrics, or you are welcome to bring your own special outfits.",
+      "Professional hair and makeup can be arranged upon request for an additional fee to help you look and feel your absolute best.",
+      "Partners and siblings are always welcome to participate in the session at no extra cost in our SIGNATURE and higher packages.",
+      "A 50% non-refundable advance is required to secure your slot. We recommend booking at least 4-6 weeks in advance to ensure availability.",
+      "For family portraits, we suggest wearing solid, neutral tones (beige, white, grey, or soft pastels). Avoid heavy patterns to keep the focus on you and your bump.",
+      "To maintain our professional standards and safety protocols, the use of personal cameras or professional outside photographers is not permitted during the session."
+    ]
+  }
+}

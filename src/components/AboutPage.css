@@ -1,0 +1,493 @@
+/* ─────────────────────────────────────────
+   About Page — Kairos Studio
+   ───────────────────────────────────────── */
+
+.about-page {
+  background-color: #f7f5f1;
+  background-image: url('/bg-bg.png');
+  /* Global paper texture */
+  background-size: 500px;
+  /* Better texture sizing */
+  background-repeat: repeat;
+  background-attachment: fixed;
+  min-height: 100vh;
+  font-family: var(--font-body);
+  color: #111;
+  overflow-x: hidden;
+}
+
+/* ── Scroll Reveal ── */
+.about-reveal {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 1s cubic-bezier(0.2, 0.8, 0.2, 1), transform 1s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.about-reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ────────────────────────────────
+   SECTION 1: HERO
+──────────────────────────────── */
+.about-hero-section {
+  position: relative;
+  /* Using gradient overlay on the texture for the perfect "colored paper" look */
+  background: linear-gradient(#245a6e), url('/bg-bg.png');
+  background-size: cover, 500px;
+  padding: 140px 0 120px;
+  overflow: hidden;
+}
+
+.about-hero-watermark {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: clamp(150px, 35vw, 400px);
+  font-weight: 800;
+  letter-spacing: 5px;
+  color: rgba(0, 0, 0, 0.08);
+  /* Darker watermark on teal */
+  user-select: none;
+  pointer-events: none;
+  line-height: 1;
+  z-index: 0;
+  font-family: var(--font-heading);
+}
+
+.about-hero-container {
+  position: relative;
+  z-index: 1;
+}
+
+.about-hero-content {
+  max-width: 950px;
+  margin: 0 auto;
+}
+
+.about-label {
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 5px;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.7);
+  display: block;
+  margin-bottom: 30px;
+  font-family: var(--font-body);
+}
+
+.about-tagline {
+  font-family: var(--font-heading);
+  font-size: clamp(28px, 4.5vw, 48px);
+  font-weight: 400;
+  color: #fff;
+  margin-bottom: 35px;
+  line-height: 1.1;
+  letter-spacing: -0.5px;
+}
+
+.about-desc {
+  font-size: 17px;
+  color: rgba(255, 255, 255, 0.9);
+  line-height: 1.85;
+  margin-bottom: 25px;
+  max-width: 900px;
+  font-weight: 400;
+}
+
+.about-studio-detail {
+  margin-top: 20px;
+  font-weight: 500;
+}
+
+/* ────────────────────────────────
+   SECTION 2: FOUNDER'S STORY
+──────────────────────────────── */
+.founder-story-section {
+  padding: 50px 0 0;
+  position: relative;
+  overflow: visible;
+}
+
+.founder-header {
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.founder-title {
+  font-family: var(--font-heading);
+  font-size: clamp(32px, 4.5vw, 52px);
+  font-weight: 400;
+  color: #111;
+  margin-bottom: 12px;
+}
+
+.title-underline {
+  width: 180px;
+  height: 1px;
+  background: #bbb;
+  margin: 0 auto;
+}
+
+/* The teal row — FULL WIDTH, shorter */
+.founder-row {
+  position: relative;
+  width: 100%;
+  margin: 0;
+  min-height: 250px;
+  /* Increased height for better proportions */
+  overflow: visible;
+
+}
+
+/* Teal backdrop — only inside the container */
+.founder-dark-backdrop {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: #245a6e;
+  z-index: 0;
+  border-radius: 0;
+}
+
+/* Grid needs to respect full width with padding */
+.founder-grid {
+  position: relative;
+  z-index: 1;
+  display: block;
+  padding: 40px 80px 40px 80px;
+  /* less top/bottom = shorter height */
+  max-width: 1300px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+.founder-text-side {
+  max-width: 55%;
+  /* text takes left 55% */
+  color: #fff;
+}
+
+.founder-quote {
+  font-family: var(--font-heading);
+  font-size: clamp(14px, 1.4vw, 14px);
+  color: rgba(255, 255, 255, 0.9);
+  line-height: 1.8;
+  font-style: italic;
+  font-weight: 400;
+}
+
+/* Image — keep right-absolute but clamp height */
+.founder-image-side {
+  position: absolute;
+  right: 60px;
+  bottom: 0;
+  width: 500px;
+  /* Wider for the portrait */
+  overflow: visible;
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+}
+
+.founder-portrait {
+  height: 580px;
+  /* Increased height as requested */
+  width: auto;
+  display: block;
+  object-fit: contain;
+  object-position: bottom center;
+  margin-top: -240px;
+  /* Bleed upward more significantly */
+  position: relative;
+  z-index: 2;
+  filter: drop-shadow(0 20px 40px rgba(0, 0, 0, 0.15));
+}
+
+
+/* ────────────────────────────────
+   SECTION 3: STATS STRIP
+──────────────────────────────── */
+.about-stats-strip {
+  padding: 80px 0;
+  border-bottom: 1px solid #eee;
+}
+
+.stats-flex {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.stat-item {
+  text-align: center;
+}
+
+.stat-number {
+  display: block;
+  font-family: var(--font-heading);
+  font-size: 56px;
+  font-weight: 500;
+  color: #1f4242;
+  margin-bottom: 10px;
+}
+
+.stat-label {
+  font-size: 15px;
+  color: #555;
+  text-transform: capitalize;
+  letter-spacing: 0.5px;
+}
+
+.stat-line-divider {
+  width: 350px;
+  height: 6px;
+  background: #ece9e2;
+  border-radius: 3px;
+}
+
+/* ────────────────────────────────
+   SECTION 4: SESSIONS YOU CAN BOOK
+──────────────────────────────── */
+.about-sessions-section {
+  padding: 100px 0 120px;
+}
+
+.sessions-header {
+  text-align: center;
+  margin-bottom: 70px;
+}
+
+.sessions-title {
+  font-family: var(--font-heading);
+  font-size: 26px;
+  letter-spacing: 4px;
+  color: #111;
+  margin-bottom: 18px;
+  text-transform: uppercase;
+}
+
+.sessions-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 32px;
+}
+
+.session-card {
+  background: linear-gradient(#245a6e), url('/bg-bg.png');
+  background-size: cover, 400px;
+  padding: 70px 50px;
+  border-radius: 12px;
+  text-align: center;
+  transition: transform 0.8s cubic-bezier(0.2, 1, 0.3, 1), box-shadow 0.8s cubic-bezier(0.2, 1, 0.3, 1);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+}
+
+.session-card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 20px 50px rgba(31, 66, 66, 0.2);
+}
+
+.session-card-title {
+  font-family: var(--font-heading);
+  font-size: 24px;
+  color: #fff;
+  margin-bottom: 24px;
+  line-height: 1.3;
+}
+
+.session-card-subtitle {
+  font-size: 15px;
+  color: rgba(255, 255, 255, 0.7);
+  line-height: 1.7;
+}
+
+/* ────────────────────────────────
+   SECTION 5: LET'S CONNECT FOOTER
+──────────────────────────────── */
+.about-connect-footer {
+  padding: 120px 0 140px;
+  border-top: 1px solid #eee;
+}
+
+.connect-flex {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+}
+
+.connect-left {
+  flex: 1;
+}
+
+.connect-main-title {
+  font-family: var(--font-heading);
+  font-size: clamp(60px, 10vw, 110px);
+  font-weight: 400;
+  color: #111;
+  line-height: 0.85;
+  letter-spacing: -3px;
+}
+
+.connect-right {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 56px;
+  padding-top: 30px;
+}
+
+.contact-phone {
+  font-family: var(--font-heading);
+  font-size: 32px;
+  font-weight: 400;
+  margin-bottom: 10px;
+}
+
+.contact-email {
+  font-family: var(--font-heading);
+  font-size: 26px;
+  color: #111;
+  text-decoration: underline;
+  text-underline-offset: 6px;
+}
+
+.contact-address-block p {
+  font-family: var(--font-heading);
+  font-size: 22px;
+  color: #333;
+  line-height: 1.5;
+  max-width: 450px;
+}
+
+/* ────────────────────────────────
+   RESPONSIVE
+──────────────────────────────── */
+@media (max-width: 1024px) {
+  .founder-row {
+    max-width: 100%;
+    min-height: auto;
+    overflow: visible;
+  }
+
+  .founder-grid {
+    padding: 10px 40px 40px 40px;
+    display: block;
+  }
+
+  .founder-text-side {
+    max-width: 55%;
+    text-align: left;
+    position: relative;
+    z-index: 2;
+  }
+
+  .founder-quote {
+    font-size: clamp(13px, 1.5vw, 15px);
+  }
+
+  .founder-image-side {
+    position: absolute;
+    right: 30px;
+    bottom: 0;
+    width: 350px;
+    display: flex;
+    justify-content: flex-end;
+    align-items: flex-end;
+    margin-top: 0;
+  }
+
+  .founder-portrait {
+    height: 400px;
+    width: auto;
+    max-width: 100%;
+    margin-top: -160px;
+    object-position: bottom right;
+    object-fit: contain;
+    pointer-events: none;
+    position: relative;
+    z-index: 1;
+  }
+}
+
+@media (max-width: 768px) {
+  .sessions-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .about-hero-section {
+    padding: 80px 10px 20px;
+  }
+
+  .about-hero-watermark {
+    font-size: clamp(80px, 20vw, 150px);
+  }
+
+  .about-label {
+    font-size: 11px;
+    margin-bottom: 20px;
+  }
+
+  .about-tagline {
+    font-family: var(--font-heading);
+    font-size: 10px;
+    font-weight: 400;
+    color: #fff;
+    margin-bottom: 20px;
+    line-height: 1.2;
+    letter-spacing: -0.5px;
+  }
+
+  .about-desc {
+    font-size: 8px;
+    line-height: 1.4;
+    margin-bottom: 15px;
+  }
+
+  .about-studio-detail {
+    font-size: 8px;
+    margin-top: 15px;
+  }
+
+  .connect-main-title {
+    font-size: 44px;
+  }
+
+  .stat-line-divider {
+    display: none;
+  }
+
+  .stats-flex {
+    flex-direction: column;
+    gap: 50px;
+  }
+
+  .founder-grid {
+    padding: 25px 20px 25px 20px;
+  }
+
+  .founder-text-side {
+    max-width: 60%;
+  }
+
+  .founder-quote {
+    font-size: 6px;
+    line-height: 1.5;
+  }
+
+  .founder-image-side {
+    right: 0px;
+    width: 65%;
+  }
+
+  .founder-portrait {
+    height: 280px;
+    margin-top: -120px;
+  }
+}

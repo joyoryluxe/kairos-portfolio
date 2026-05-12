@@ -1,0 +1,380 @@
+.service-gallery-page {
+  padding: 20px 0 60px;
+  background-color: var(--background-color);
+  min-height: 100vh;
+}
+
+.gallery-header {
+  margin-bottom: 40px;
+}
+
+.back-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: none;
+  border: none;
+  color: var(--text-color);
+  font-family: var(--font-primary);
+  font-size: 16px;
+  cursor: pointer;
+  padding: 8px 16px;
+  margin-bottom: 24px;
+  border-radius: 30px;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.back-btn:hover {
+  background-color: var(--primary-color);
+  color: var(--background-color);
+}
+
+.back-btn svg {
+  width: 20px;
+  height: 20px;
+}
+
+.gallery-title-wrapper h1 {
+  font-family: var(--font-heading);
+  font-size: 3rem;
+  color: var(--text-color);
+  margin-bottom: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.gallery-subtitle {
+  font-size: 1.5rem;
+  font-weight: 400;
+  color: var(--text-light);
+  margin-left: 10px;
+}
+
+.gallery-breadcrumb {
+  font-family: var(--font-primary);
+  font-size: 14px;
+  color: var(--text-light);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+/* Masonry Layout */
+.masonry-grid {
+  column-count: 3;
+  column-gap: 20px;
+}
+
+.masonry-item {
+  break-inside: avoid;
+  margin-bottom: 20px;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease;
+}
+
+.masonry-item:hover {
+  transform: translateY(-5px);
+}
+
+.masonry-item .lazy-image-wrapper {
+  position: relative;
+  height: auto !important;
+}
+
+.masonry-item .lazy-image-img,
+.masonry-item picture {
+  position: relative !important;
+  height: auto !important;
+  display: block;
+}
+
+.masonry-item img {
+  width: 100%;
+  height: auto;
+  display: block;
+  object-fit: cover;
+}
+
+@media (max-width: 1024px) {
+  .masonry-grid {
+    column-count: 2;
+  }
+
+  .gallery-title-wrapper h1 {
+    font-size: 2.5rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .service-gallery-page {
+    padding-top: 10px;
+  }
+
+  .masonry-grid {
+    column-count: 1;
+  }
+
+  .gallery-header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  .back-btn {
+    font-size: 14px;
+    padding: 6px 12px;
+    margin-bottom: 16px;
+    margin-inline: auto;
+  }
+
+  .back-btn svg {
+    width: 16px;
+    height: 16px;
+  }
+
+  .gallery-title-wrapper {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .gallery-title-wrapper h1 {
+    font-size: 2.5rem !important;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    text-align: center;
+    line-height: 1.3;
+  }
+
+  .gallery-subtitle {
+    font-size: 1.1rem;
+    margin-left: 8px;
+  }
+
+  .gallery-breadcrumb {
+    text-align: center;
+    width: 100%;
+  }
+}
+
+/* ── Full Screen Viewer ── */
+.gallery-viewer {
+  position: fixed;
+  inset: 0;
+  z-index: 2000;
+  display: flex;
+  flex-direction: column;
+  background-color: #000;
+  color: #fff;
+}
+
+.viewer-overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+}
+
+.viewer-close {
+  position: absolute;
+  top: 30px;
+  right: 30px;
+  z-index: 10;
+  background: rgba(255, 255, 255, 0.1);
+  border: none;
+  color: #fff;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.viewer-close:hover {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+.viewer-close svg {
+  width: 24px;
+  height: 24px;
+}
+
+.viewer-main {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 40px;
+  position: relative;
+  z-index: 5;
+  overflow: hidden;
+}
+
+.viewer-nav {
+  background: rgba(255, 255, 255, 0.05);
+  border: none;
+  color: #fff;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.viewer-nav:hover {
+  background: rgba(255, 255, 255, 0.2);
+  transform: scale(1.1);
+}
+
+.viewer-nav svg {
+  width: 32px;
+  height: 32px;
+}
+
+.viewer-image-container {
+  flex: 1;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  padding: 20px;
+}
+
+.viewer-image {
+  max-width: 100%;
+  max-height: calc(100vh - 250px);
+  object-fit: contain;
+  box-shadow: 0 10px 50px rgba(0, 0, 0, 0.5);
+  animation: fadeIn 0.4s ease;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.viewer-counter {
+  margin-top: 20px;
+  font-family: var(--font-primary);
+  font-size: 16px;
+  color: rgba(255, 255, 255, 0.6);
+  letter-spacing: 2px;
+}
+
+.viewer-thumbnails-wrapper {
+  height: 120px;
+  background: rgba(0, 0, 0, 0.8);
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 40px;
+  z-index: 10;
+}
+
+.viewer-thumbnails {
+  display: flex;
+  gap: 12px;
+  overflow-x: auto;
+  padding: 10px 0;
+  max-width: 100%;
+}
+
+.viewer-thumbnails::-webkit-scrollbar {
+  height: 4px;
+}
+
+.viewer-thumbnails::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.viewer-thumbnails::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 2px;
+}
+
+.thumbnail-item {
+  width: 80px;
+  height: 60px;
+  flex-shrink: 0;
+  cursor: pointer;
+  border-radius: 4px;
+  overflow: hidden;
+  opacity: 0.4;
+  transition: all 0.3s ease;
+  border: 2px solid transparent;
+}
+
+.thumbnail-item:hover {
+  opacity: 0.7;
+}
+
+.thumbnail-item.active {
+  opacity: 1;
+  border-color: #fff;
+  transform: scale(1.1);
+}
+
+.thumbnail-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+@media (max-width: 768px) {
+  .viewer-main {
+    padding: 20px;
+  }
+
+  .viewer-nav {
+    width: 40px;
+    height: 40px;
+    position: absolute;
+    bottom: 20px;
+    z-index: 100;
+  }
+
+  .viewer-nav.prev {
+    left: 40px;
+  }
+
+  .viewer-nav.next {
+    right: 40px;
+  }
+
+  .viewer-close {
+    top: 20px;
+    right: 20px;
+    width: 40px;
+    height: 40px;
+  }
+
+  .viewer-thumbnails-wrapper {
+    height: 100px;
+    padding: 0 20px;
+  }
+
+  .thumbnail-item {
+    width: 60px;
+    height: 45px;
+  }
+}

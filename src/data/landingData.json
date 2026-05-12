@@ -1,0 +1,165 @@
+{
+  "hero": {
+    "title": "Every Love Story Deserves to Be Remembered",
+    "subtitle": "We turn your moments into memories.",
+    "hashtag": "#Weddingshoot",
+    "backgroundImage": "/hero-bg.webp",
+    "mobileBackgroundImage": "/mobile.webp"
+  },
+  "navLinks": [
+    {
+      "label": "Home",
+      "href": "/"
+    },
+    {
+      "label": "Services",
+      "href": "/services",
+      "dropdownItems": [
+        "Maternity Photography",
+        "Baby Photography",
+        "Interior Photography",
+        "Birthdays & Events",
+        "Product Photography"
+      ]
+    },
+    {
+      "label": "Gallery",
+      "href": "/gallery"
+    },
+    {
+      "label": "Pricing",
+      "href": "/pricing",
+      "dropdownItems": [
+        "Maternity Photography",
+        "Baby Photography",
+        "Interior Shoot",
+        "Birthdays & Events",
+        "Product Shoot"
+      ]
+    },
+    {
+      "label": "About Us",
+      "href": "/about"
+    },
+    {
+      "label": "Contact",
+      "href": "/contact"
+    }
+  ],
+  "services": {
+    "title": "Services",
+    "items": [
+      {
+        "id": 1,
+        "title": "Product Photography",
+        "image": "/product1.webp"
+      },
+      {
+        "id": 2,
+        "title": "Baby Photography",
+        "image": "/small1.webp"
+      },
+      {
+        "id": 3,
+        "title": "Birthdays & Events",
+        "image": "/birthday.jpg"
+      },
+      {
+        "id": 4,
+        "title": "Interior Photography",
+        "image": "/interior.jpg"
+      },
+      {
+        "id": 5,
+        "title": "Events Photography",
+        "image": "/small1.webp"
+      }
+    ]
+  },
+  "bestShots": {
+    "title": "Some Among Best Shots",
+    "items": [
+      {
+        "id": 1,
+        "image": "/birthday1.jpg"
+      },
+      {
+        "id": 2,
+        "image": "/interior.jpg"
+      },
+      {
+        "id": 3,
+        "image": "/birthday.jpg"
+      },
+      {
+        "id": 4,
+        "image": "/interior1.jpg"
+      },
+      {
+        "id": 5,
+        "image": "/baby1.jpg"
+      },
+      {
+        "id": 6,
+        "image": "/product1.jpg"
+      },
+      {
+        "id": 7,
+        "image": "/product2.jpg"
+      },
+      {
+        "id": 8,
+        "image": "/baby2.jpg"
+      },
+      {
+        "id": 9,
+        "image": "/product3.jpg"
+      },
+      {
+        "id": 10,
+        "image": "/interior2.jpg"
+      },
+      {
+        "id": 11,
+        "image": "/interior3.jpg"
+      },
+      {
+        "id": 12,
+        "image": "/girl.jpg"
+      }
+    ]
+  },
+  "whyChooseUs": {
+    "title": "Why Choose Us",
+    "stats": [
+      {
+        "id": 1,
+        "number": "12+",
+        "label": "Project Completed"
+      },
+      {
+        "id": 2,
+        "number": "100+",
+        "label": "Happy Customers"
+      },
+      {
+        "id": 3,
+        "number": "20+",
+        "label": "Conversion Rate"
+      }
+    ],
+    "about": {
+      "title1": "To the Bump Queen",
+      "text1": "Embark on one of the most magical journeys of your life, and let us help you cherish every moment! As parents, we know how quickly time flies—the tiny hands that once held yours, the first smiles that filled your heart, and the cozy moments of cuddling you wish could last forever. Let us preserve these precious memories with professional newborn photography and maternity photography that capture your love, joy, and those unforgettable emotions. Whether you're looking for baby photography or a maternity photoshoot, we're here to make your experience special and timeless.",
+      "title2": "MOMENTS DEFINE THE STORIES..",
+      "text2": "As a photographer, my goal is simple yet meaningful: to capture the moments that matter. I aim to create timeless images that preserve love, joy, and connection, leaving a lasting legacy for future generations to cherish. Through every shot, I strive to make a positive impact with every memory I capture.",
+      "image": "/founder.png"
+    }
+  },
+  "connect": {
+    "title": "Let's Connect",
+    "phone": "87809 83966",
+    "email": "hello@kairosstudio.in",
+    "address": "Jai Maadi Bunglows, 7, Aarohi Club Rd, opp. Aarohi viviana, South Bopal, Ahmedabad, Gujarat 380058"
+  }
+}

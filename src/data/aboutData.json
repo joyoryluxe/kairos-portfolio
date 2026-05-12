@@ -1,0 +1,62 @@
+{
+  "about": {
+    "label": "ABOUT KAIROS !",
+    "tagline": "KAIROS Photography — Where Every Moment Becomes Art.",
+    "description": "Based in Bangalore with 16 studios across India, we specialize in Portraits, Weddings, Corporate Shoots, Kids, Maternity & Newborn Shoots, Pet Photography, Family Portraits, Event Coverage, and Video Productions. Whether you're celebrating love, life, or creativity, our team captures every story with perfection. Explore our studio rental spaces for your next creative project.",
+    "studioDetail": "Looking for a professional setup? Our studio rental space in Bangalore offers photographers, content creators, and brands a fully equipped environment to bring their creative visions to life."
+  },
+  "founderStory": {
+    "sectionTitle": "Founder's Story",
+    "founderImage": "/founder.png",
+    "quote": "“Our journey began with just a camera, a dream, and the courage to start. What began as small weekend shoots slowly grew into something bigger than we imagined. With every challenge, we learned... with every client, we grew... and with every story, our purpose became clearer.\n\nToday, this company stands as the result of that journey—built with passion, patience, and the belief that beautiful memories deserve to be preserved with care.”"
+  },
+  "stats": [
+    {
+      "id": 1,
+      "value": "12+",
+      "label": "Years of Experience"
+    },
+    {
+      "id": 2,
+      "value": "10k+",
+      "label": "Photoshoots Completed"
+    }
+  ],
+  "services": [
+    {
+      "id": 1,
+      "title": "Corporate & Personal Headshots",
+      "description": "Professional photos for work or personal branding."
+    },
+    {
+      "id": 2,
+      "title": "Maternity Photography",
+      "description": "Professional photos for work or personal branding."
+    },
+    {
+      "id": 3,
+      "title": "Corporate & Personal Headshots",
+      "description": "Professional photos for work or personal branding."
+    },
+    {
+      "id": 4,
+      "title": "Corporate & Personal Headshots",
+      "description": "Professional photos for work or personal branding."
+    },
+    {
+      "id": 5,
+      "title": "Corporate & Personal Headshots",
+      "description": "Professional photos for work or personal branding."
+    },
+    {
+      "id": 6,
+      "title": "Corporate & Personal Headshots",
+      "description": "Professional photos for work or personal branding."
+    }
+  ],
+  "connect": {
+    "phone": "87809 83966",
+    "email": "hello@kairosstudio.in",
+    "address": "Jai Maadi Bunglows, 7, Aarohi Club Rd, opp. Aarohi viviana, South Bopal, Ahmedabad, Gujarat 380058"
+  }
+}
