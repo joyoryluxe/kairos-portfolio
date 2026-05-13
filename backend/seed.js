@@ -236,7 +236,7 @@ const aboutSeeds = [
     page: 'about',
     section: 'founder-story',
     title: 'Founder\'s Story',
-    heroImage: '/founder.png', // Reusing heroImage field for founder portrait
+    heroImage: '/founder.png',
     description: '“Our journey began with just a camera, a dream, and the courage to start. What began as small weekend shoots slowly grew into something bigger than we imagined. With every challenge, we learned... with every client, we grew... and with every story, our purpose became clearer.\n\nToday, this company stands as the result of that journey—built with passion, patience, and the belief that beautiful memories deserve to be preserved with care.”'
   },
   {
