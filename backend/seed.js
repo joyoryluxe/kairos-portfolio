@@ -7,7 +7,7 @@ require('dotenv').config();
 const mongoose = require('mongoose');
 const SectionData = require('./models/SectionData');
 
-const MONGO_URI = process.env.MONGO_URI || 'mongodb://127.0.0.1:27017/kairosdb';
+const MONGO_URI = process.env.MONGO_URI
 
 // ─── Landing / Home page data ─────────────────────────────────────────────────
 const homeSeeds = [
