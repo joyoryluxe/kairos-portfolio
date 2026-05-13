@@ -11,9 +11,31 @@ const app = express();
 const PORT = process.env.PORT || 5000;
 
 // Middleware
-app.use(cors()); // Allow cross-origin requests
-app.use(express.json()); // Parse JSON bodies
+const allowedOrigins = [
+  'https://kairosstudio.in',
+  'http://localhost:5173',
+  'http://localhost:3000',
+  'https://kairos-portfolio-xsdp.onrender.com'
+];
+
+app.use(cors({
+  origin: function (origin, callback) {
+    if (!origin || allowedOrigins.indexOf(origin) !== -1) {
+      callback(null, true);
+    } else {
+      callback(new Error('Not allowed by CORS'));
+    }
+  },
+  credentials: true
+}));
+
+app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+
+// Health Check Endpoint
+app.get('/health', (req, res) => {
+  res.status(200).json({ status: 'OK', message: 'Backend is healthy', timestamp: new Date() });
+});
 
 // Routes
 app.use('/api/sections', sectionRoutes);
@@ -31,14 +53,14 @@ mongoose.connect(process.env.MONGO_URI)
 // Serve static files (admin panel)
 app.use(express.static(path.join(__dirname, 'public')));
 
-// Admin panel route
-app.get('/admin', (req, res) => {
-  res.sendFile(path.join(__dirname, 'public', 'admin.html'));
-});
+// // Admin panel route
+// app.get('/admin', (req, res) => {
+//   res.sendFile(path.join(__dirname, 'public', 'admin.html'));
+// });
 
 // Root Route
 app.get('/', (req, res) => {
-  res.send('Kairos Backend API is running. Visit <a href="/admin">/admin</a> for the admin panel.');
+  res.send('Kairos Backend API is running.');
 });
 
 // Start Server
