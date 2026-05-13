@@ -55,7 +55,7 @@ const sectionDataSchema = new mongoose.Schema({
   page: {
     type: String,
     required: true,
-    enum: ['home', 'pricing', 'service', 'other'],
+    enum: ['home', 'pricing', 'service', 'about', 'other'],
   },
 
   /**

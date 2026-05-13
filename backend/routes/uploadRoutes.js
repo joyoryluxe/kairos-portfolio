@@ -35,12 +35,14 @@ router.post('/', upload.single('file'), async (req, res) => {
         {
           folder,
           resource_type: 'image',
-          // Auto quality & format for fast loading
-          transformation: [{ quality: 'auto', fetch_format: 'auto' }],
         },
         (error, result) => {
-          if (error) reject(error);
-          else resolve(result);
+          if (error) {
+            console.error('Cloudinary Upload Error:', error);
+            reject(error);
+          } else {
+            resolve(result);
+          }
         }
       );
       stream.end(req.file.buffer);
