@@ -3,6 +3,7 @@ import './PricingDetail.css';
 import { useParams } from 'react-router-dom';
 import { useSection } from '../hooks/useSection';
 import { getAssetPath } from '../utils/assetPath';
+import Loader from './Loader';
 
 // Fallback data
 import pricingData from '../data/pricingData.json';
@@ -23,7 +24,8 @@ const PricingDetail: React.FC = () => {
   const { data: apiData, loading } = useSection('pricing', id || '');
 
   // Merge: prefer backend, fall back to local JSON
-  const fallback = id ? (pricingData as any)[id] : null;
+  const normalizedId = id?.replace(/\s+/g, '-');
+  const fallback = id ? ((pricingData as any)[id] || (pricingData as any)[normalizedId || '']) : null;
   const data = apiData || fallback;
 
   const handlePackageSelect = (pkgName: string, price: string) => {
@@ -35,7 +37,7 @@ const PricingDetail: React.FC = () => {
   };
 
   if (loading) {
-    return <div className="container" style={{ padding: '150px 20px', textAlign: 'center' }}>Loading...</div>;
+    return <Loader text="Loading Pricing Packages" />;
   }
 
   if (!data) {

@@ -2,6 +2,7 @@ import React from 'react';
 import './PricingPage.css';
 import { getAssetPath } from '../utils/assetPath';
 import { useSection } from '../hooks/useSection';
+import Loader from './Loader';
 
 // Fallback data
 import pricingData from '../data/pricingData.json';
@@ -12,7 +13,11 @@ interface PricingPageProps {
 }
 
 const PricingPage: React.FC<PricingPageProps> = ({ onPricingSelect }) => {
-  const { data: apiData } = useSection('pricing', 'pricing-list');
+  const { data: apiData, loading } = useSection('pricing', 'pricing-list');
+
+  if (loading) {
+    return <Loader text="Loading Pricing Options" />;
+  }
 
   // Use backend pricingCards if available, else build from local JSON
   const categories = (apiData?.pricingCards && apiData.pricingCards.length > 0)

@@ -21,11 +21,7 @@ export default defineConfig({
             params: {
               overrides: {
                 cleanupNumericValues: false,
-                removeViewBox: false, // keep viewBox
-              },
-              cleanupIds: {
-                minify: false,
-                remove: false,
+                removeViewBox: false,
               },
             },
           },
@@ -55,5 +51,5 @@ export default defineConfig({
       },
     }),
   ],
-  base: '/portfolio/',
+  base: '/',
 })

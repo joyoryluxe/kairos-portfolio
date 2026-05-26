@@ -1,16 +1,48 @@
 import React, { useEffect, useRef, useState } from 'react';
 import './AboutPage.css';
-import aboutData from '../data/aboutData.json';
 import { getAssetPath } from '../utils/assetPath';
+import { usePageSections } from '../hooks/useSection';
+import aboutData from '../data/aboutData.json';
+import Loader from './Loader';
 
 interface AboutPageProps {
   onBookNow: () => void;
 }
 
 const AboutPage: React.FC<AboutPageProps> = () => {
-  const { about, founderStory, stats, services } = aboutData;
+  const { sections, loading } = usePageSections('about');
   const [countersStarted, setCountersStarted] = useState(false);
   const statsRef = useRef<HTMLDivElement>(null);
+
+  // Fallback data
+  const fb = aboutData;
+
+  // Map API sections to component variables
+  const introSection = sections['about-intro'];
+  const founderSection = sections['founder-story'];
+  const statsSection = sections['about-stats'];
+  const servicesSection = sections['about-services'];
+
+  const about = {
+    label: introSection?.subtitle || fb.about.label,
+    tagline: introSection?.title || fb.about.tagline,
+    description: introSection?.description || fb.about.description,
+    studioDetail: (introSection?.extra as any)?.studioDetail || fb.about.studioDetail,
+  };
+
+  const founderStory = {
+    sectionTitle: founderSection?.title || fb.founderStory.sectionTitle,
+    founderImage: founderSection?.heroImage || fb.founderStory.founderImage,
+    quote: founderSection?.description || fb.founderStory.quote,
+  };
+
+  const stats = (statsSection?.stats && statsSection.stats.length > 0)
+    ? statsSection.stats.map(s => ({ id: s.id, value: s.number, label: s.label }))
+    : fb.stats;
+
+  const services = (servicesSection?.serviceItems && servicesSection.serviceItems.length > 0)
+    ? servicesSection.serviceItems.map(s => ({ id: s.id, title: s.title, description: (s as any).description || 'Professional photography service.' }))
+    : fb.services;
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -38,7 +70,11 @@ const AboutPage: React.FC<AboutPageProps> = () => {
     );
     reveals.forEach((el) => observer.observe(el));
     return () => observer.disconnect();
-  }, []);
+  }, [loading]); // Re-run when loading finishes to catch newly rendered elements
+
+  if (loading && Object.keys(sections).length === 0) {
+    return <Loader text="Loading About Us" />;
+  }
 
   return (
     <div className="about-page">

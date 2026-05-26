@@ -1,0 +1,194 @@
+.loader-wrapper {
+  position: relative;
+  width: 100%;
+  min-height: 60vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 4rem 1rem;
+  z-index: 10;
+}
+
+.loader-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2rem;
+  padding: 3rem 4rem;
+  background: rgba(255, 255, 255, 0.65);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(11, 57, 84, 0.1);
+  border-radius: 24px;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.04), 
+              inset 0 1px 0 rgba(255, 255, 255, 0.8);
+  animation: loaderFadeIn 0.5s ease-out forwards;
+}
+
+/* Shutter Ring Animation */
+.shutter-ring {
+  position: relative;
+  width: 90px;
+  height: 90px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--primary-color), #1c6e9c);
+  padding: 4px;
+  box-shadow: 0 10px 25px rgba(11, 57, 84, 0.25);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  animation: ringPulse 2.5s infinite ease-in-out;
+}
+
+.shutter-ring-inner {
+  position: absolute;
+  width: 82px;
+  height: 82px;
+  border-radius: 50%;
+  background: #061c2b;
+  z-index: 1;
+}
+
+/* Simulated rotating camera shutter blades inside */
+.shutter-blade {
+  position: absolute;
+  width: 40px;
+  height: 40px;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  transform-origin: bottom right;
+  z-index: 2;
+  border-radius: 4px;
+  animation: bladeSpin 3s infinite cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.blade-1 { top: 5px; left: 5px; animation-delay: 0s; }
+.blade-2 { top: 5px; right: 5px; animation-delay: 0.75s; }
+.blade-3 { bottom: 5px; right: 5px; animation-delay: 1.5s; }
+.blade-4 { bottom: 5px; left: 5px; animation-delay: 2.25s; }
+
+/* Central Glowing Aperture Focus */
+.aperture-glow {
+  position: absolute;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: #ffffff;
+  box-shadow: 0 0 20px #fff, 0 0 35px var(--primary-color);
+  z-index: 3;
+  animation: glowBreathe 2s infinite alternate ease-in-out;
+}
+
+/* Premium Typography styling */
+.loader-text-wrapper {
+  display: flex;
+  align-items: baseline;
+  gap: 2px;
+}
+
+.loader-text {
+  font-family: var(--font-heading);
+  font-size: 1.35rem;
+  font-weight: 600;
+  color: var(--primary-color);
+  letter-spacing: 1px;
+}
+
+.loader-dots {
+  display: inline-flex;
+  font-family: var(--font-heading);
+  font-size: 1.35rem;
+  font-weight: 600;
+  color: var(--primary-color);
+}
+
+.loader-dots span {
+  animation: dotBlink 1.4s infinite both;
+}
+
+.loader-dots span:nth-child(2) {
+  animation-delay: 0.2s;
+}
+
+.loader-dots span:nth-child(3) {
+  animation-delay: 0.4s;
+}
+
+/* Keyframes */
+@keyframes loaderFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(15px) scale(0.97);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes ringPulse {
+  0%, 100% {
+    transform: scale(1);
+    box-shadow: 0 10px 25px rgba(11, 57, 84, 0.25);
+  }
+  50% {
+    transform: scale(1.05);
+    box-shadow: 0 15px 35px rgba(11, 57, 84, 0.4);
+  }
+}
+
+@keyframes bladeSpin {
+  0% {
+    transform: rotate(0deg);
+  }
+  50% {
+    transform: rotate(180deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes glowBreathe {
+  0% {
+    transform: scale(0.85);
+    opacity: 0.7;
+  }
+  100% {
+    transform: scale(1.15);
+    opacity: 1;
+  }
+}
+
+@keyframes dotBlink {
+  0% { opacity: 0.2; }
+  20% { opacity: 1; }
+  100% { opacity: 0.2; }
+}
+
+@media (max-width: 600px) {
+  .loader-container {
+    padding: 2.5rem 2rem;
+    gap: 1.5rem;
+  }
+  
+  .shutter-ring {
+    width: 75px;
+    height: 75px;
+  }
+  
+  .shutter-ring-inner {
+    width: 67px;
+    height: 67px;
+  }
+  
+  .loader-text {
+    font-size: 1.15rem;
+  }
+  
+  .loader-dots {
+    font-size: 1.15rem;
+  }
+}

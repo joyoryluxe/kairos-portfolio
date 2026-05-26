@@ -11,6 +11,57 @@ function resolvePreviewUrl(url: string): string {
   return `${FRONTEND_URL}${url.startsWith('/') ? '' : '/'}${url}`;
 }
 
+const compressImage = (file: File, maxWidth = 2560, quality = 0.85): Promise<Blob> => {
+  return new Promise((resolve, reject) => {
+    if (file.type === 'image/gif') {
+      resolve(file);
+      return;
+    }
+
+    const reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onload = (event) => {
+      const img = new Image();
+      img.src = event.target?.result as string;
+      img.onload = () => {
+        const canvas = document.createElement('canvas');
+        let width = img.width;
+        let height = img.height;
+
+        if (width > maxWidth) {
+          height = Math.round((height * maxWidth) / width);
+          width = maxWidth;
+        }
+
+        canvas.width = width;
+        canvas.height = height;
+
+        const ctx = canvas.getContext('2d');
+        if (!ctx) {
+          resolve(file);
+          return;
+        }
+
+        ctx.drawImage(img, 0, 0, width, height);
+
+        canvas.toBlob(
+          (blob) => {
+            if (blob) {
+              resolve(blob);
+            } else {
+              resolve(file);
+            }
+          },
+          'image/webp',
+          quality
+        );
+      };
+      img.onerror = () => resolve(file);
+    };
+    reader.onerror = () => resolve(file);
+  });
+};
+
 interface Props {
   value: string;
   onChange: (url: string) => void;
@@ -26,11 +77,20 @@ export default function ImageUploader({ value, onChange, folder = 'kairos', labe
   const handleFile = async (file: File) => {
     setUploading(true);
     setError('');
-    const form = new FormData();
-    form.append('file', file);
-    form.append('folder', folder);
 
     try {
+      // Compress the image on the client-side to high-quality WebP first
+      const compressedBlob = await compressImage(file);
+      const fileExtension = file.type === 'image/gif' ? '.gif' : '.webp';
+      const newFileName = file.name.replace(/\.[^/.]+$/, "") + fileExtension;
+      const fileToUpload = new File([compressedBlob], newFileName, {
+        type: file.type === 'image/gif' ? 'image/gif' : 'image/webp'
+      });
+
+      const form = new FormData();
+      form.append('file', fileToUpload);
+      form.append('folder', folder);
+
       const res = await fetch(`${API_URL}/api/upload`, { method: 'POST', body: form });
       const json = await res.json();
       if (!json.success) throw new Error(json.message);

@@ -15,7 +15,7 @@ export interface SectionDoc {
   heroImage?: string;
   breadcrumb?: string;
   photos?: string[];
-  serviceItems?: { id: number; title: string; image: string }[];
+  serviceItems?: { id: number; title: string; image: string; description?: string }[];
   bestShotItems?: { id: number; image: string }[];
   stats?: { id: number; number: string; label: string }[];
   about?: { title1: string; text1: string; title2: string; text2: string; image: string };
@@ -24,6 +24,7 @@ export interface SectionDoc {
   addOns?: { name: string; price: string }[];
   notes?: string[];
   sections?: { title: string; images: string[] }[];
+  extra?: Record<string, unknown>;
   createdAt?: string;
   updatedAt?: string;
 }

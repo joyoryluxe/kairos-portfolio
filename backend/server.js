@@ -6,6 +6,7 @@ const path = require('path');
 
 const sectionRoutes = require('./routes/sectionRoutes');
 const uploadRoutes  = require('./routes/uploadRoutes');
+const authRoutes    = require('./routes/authRoutes');
 
 const app = express();
 const PORT = process.env.PORT || 5000;
@@ -40,6 +41,7 @@ app.get('/health', (req, res) => {
 // Routes
 app.use('/api/sections', sectionRoutes);
 app.use('/api/upload',   uploadRoutes);
+app.use('/api/auth',     authRoutes);
 
 // Database connection
 mongoose.connect(process.env.MONGO_URI)

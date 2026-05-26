@@ -1,3 +1,25 @@
+# Dependencies
+node_modules/
+.pnp
+.pnp.js
+
+# Build and Production
+dist/
+dist-ssr/
+build/
+.next/
+out/
+.vercel/
+
+# Environment Files (IMPORTANT: NEVER PUSH THESE)
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+*.env
+*.env.*
+
 # Logs
 logs
 *.log
@@ -7,18 +29,22 @@ yarn-error.log*
 pnpm-debug.log*
 lerna-debug.log*
 
-node_modules
-dist
-dist-ssr
-*.local
-
-# Editor directories and files
-.vscode/*
+# Editor and IDEs
+.vscode/
 !.vscode/extensions.json
-.idea
+.idea/
 .DS_Store
 *.suo
 *.ntvs*
 *.njsproj
 *.sln
 *.sw?
+Thumbs.db
+
+# Testing
+coverage/
+
+# Misc
+*.tsbuildinfo
+*.pem
+next-env.d.ts

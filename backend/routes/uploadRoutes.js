@@ -1,27 +1,45 @@
 // routes/uploadRoutes.js  – File upload via multer → Cloudinary
-const express  = require('express');
-const multer   = require('multer');
+const express = require('express');
+const multer = require('multer');
 const cloudinary = require('../config/cloudinary');
-const router   = express.Router();
+const router = express.Router();
 
 // Store file in memory (no disk write), then stream to Cloudinary
-const storage  = multer.memoryStorage();
-const upload   = multer({
+const storage = multer.memoryStorage();
+const upload = multer({
   storage,
-  limits: { fileSize: 10 * 1024 * 1024 }, // 10 MB max
+  limits: { fileSize: 100 * 1024 * 1024 }, // 100 MB max
   fileFilter: (req, file, cb) => {
-    const allowed = ['image/jpeg', 'image/png', 'image/webp', 'image/gif', 'image/avif'];
-    if (allowed.includes(file.mimetype)) cb(null, true);
-    else cb(new Error('Only image files are allowed (jpg, png, webp, gif, avif)'), false);
+    if (file.mimetype.startsWith('image/')) {
+      cb(null, true);
+    } else {
+      cb(new Error('Only image files are allowed'), false);
+    }
   },
 });
+
+// Middleware helper to handle multer errors gracefully
+const uploadSingle = (req, res, next) => {
+  upload.single('file')(req, res, (err) => {
+    if (err) {
+      if (err instanceof multer.MulterError) {
+        if (err.code === 'LIMIT_FILE_SIZE') {
+          return res.status(400).json({ success: false, message: 'File is too large. Max size is 100MB.' });
+        }
+        return res.status(400).json({ success: false, message: `Upload error: ${err.message}` });
+      }
+      return res.status(400).json({ success: false, message: err.message });
+    }
+    next();
+  });
+};
 
 /**
  * POST /api/upload
  * Body: multipart/form-data  { file: <image>, folder?: string }
  * Returns: { success, url, publicId }
  */
-router.post('/', upload.single('file'), async (req, res) => {
+router.post('/', uploadSingle, async (req, res) => {
   try {
     if (!req.file) {
       return res.status(400).json({ success: false, message: 'No file provided' });
@@ -35,6 +53,8 @@ router.post('/', upload.single('file'), async (req, res) => {
         {
           folder,
           resource_type: 'image',
+          format: 'webp',
+          quality: 'auto',
         },
         (error, result) => {
           if (error) {
@@ -50,7 +70,7 @@ router.post('/', upload.single('file'), async (req, res) => {
 
     res.status(200).json({
       success: true,
-      url:      result.secure_url,
+      url: result.secure_url,
       publicId: result.public_id,
     });
   } catch (error) {

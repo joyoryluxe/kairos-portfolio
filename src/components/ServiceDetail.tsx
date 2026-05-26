@@ -4,6 +4,7 @@ import { useParams, useNavigate } from 'react-router-dom';
 import { useSection } from '../hooks/useSection';
 import { getAssetPath } from '../utils/assetPath';
 import LazyImage from './LazyImage';
+import Loader from './Loader';
 
 // Fallback data
 import servicesData from '../data/servicesData.json';
@@ -20,11 +21,12 @@ const ServiceDetail: React.FC<ServiceDetailProps> = ({ onGetQuote }) => {
   const { data: apiData, loading } = useSection('service', serviceId || '');
 
   // Merge: prefer backend, fallback to local JSON
-  const fallback = serviceId ? (servicesData as any)[serviceId] : null;
+  const normalizedId = serviceId?.replace(/\s+/g, '-');
+  const fallback = serviceId ? ((servicesData as any)[serviceId] || (servicesData as any)[normalizedId || '']) : null;
   const service = apiData || (fallback ? { ...fallback, heroImage: fallback.heroImage } : null);
 
   if (loading) {
-    return <div className="container" style={{ padding: '150px 20px', textAlign: 'center' }}>Loading...</div>;
+    return <Loader text="Loading Service Details" />;
   }
 
   if (!service) {

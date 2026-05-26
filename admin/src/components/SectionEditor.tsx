@@ -68,10 +68,10 @@ function MultiImageUploader({
 function ServiceItemEditor({
   items, onChange,
 }: {
-  items: { id: number; title: string; image: string }[];
-  onChange: (items: { id: number; title: string; image: string }[]) => void;
+  items: { id: number; title: string; image: string; description?: string }[];
+  onChange: (items: { id: number; title: string; image: string; description?: string }[]) => void;
 }) {
-  const add = () => onChange([...items, { id: Date.now(), title: '', image: '' }]);
+  const add = () => onChange([...items, { id: Date.now(), title: '', image: '', description: '' }]);
   const remove = (i: number) => onChange(items.filter((_, idx) => idx !== i));
   const update = (i: number, key: string, val: string) => {
     const next = [...items];
@@ -89,6 +89,7 @@ function ServiceItemEditor({
               <button className="btn btn-danger btn-sm" onClick={() => remove(i)}>✕</button>
             </div>
             <TextInput label="Service Title" value={item.title} onChange={(val) => update(i, 'title', val)} />
+            <TextArea label="Description" value={item.description || ''} onChange={(val) => update(i, 'description', val)} />
             <ImageUploader label="Service Image" value={item.image} onChange={(url) => update(i, 'image', url)} folder="kairos/services" />
           </div>
         ))}
@@ -382,6 +383,13 @@ export default function SectionEditor({ data: initial, page, section }: Props) {
     }));
   }, []);
 
+  const setExtra = useCallback((key: string, val: string) => {
+    setData((prev) => ({
+      ...prev,
+      extra: { ...prev.extra, [key]: val },
+    }));
+  }, []);
+
   const handleSave = async () => {
     setSaving(true);
     try {
@@ -439,19 +447,22 @@ export default function SectionEditor({ data: initial, page, section }: Props) {
       <div className="card">
         <div className="card-title">Core Content</div>
         <TextInput label="Main Title" value={data.title || ''} onChange={(v) => set('title', v)} />
-        {(section === 'hero' || (page === 'pricing' && section !== 'pricing-list')) && (
+        {(section === 'hero' || section === 'about-intro' || (page === 'pricing' && section !== 'pricing-list')) && (
           <TextInput label="Sub-heading" value={data.subtitle || ''} onChange={(v) => set('subtitle', v)} />
         )}
-        {((page === 'pricing' && section !== 'pricing-list') || page === 'service') && (
+        {(section === 'about-intro' || section === 'founder-story' || (page === 'pricing' && section !== 'pricing-list') || page === 'service') && (
           <TextArea label="Long Description" value={data.description || ''} onChange={(v) => set('description', v)} />
         )}
         {section === 'hero' && (
           <TextInput label="Social Tagline / Hashtag" value={data.hashtag || ''} onChange={(v) => set('hashtag', v)} />
         )}
+        {section === 'about-intro' && (
+          <TextArea label="Studio Detail" value={data.extra?.studioDetail as string || ''} onChange={(v) => setExtra('studioDetail', v)} />
+        )}
       </div>
 
       {/* ── BANNER / HERO ─────────────────────────────── */}
-      {(section === 'hero' || (page === 'pricing' && section !== 'pricing-list') || page === 'service') && (
+      {(section === 'hero' || section === 'founder-story' || (page === 'pricing' && section !== 'pricing-list') || page === 'service') && (
         <div className="card">
           <div className="card-title">Media Assets</div>
           {section === 'hero' && (
@@ -460,7 +471,7 @@ export default function SectionEditor({ data: initial, page, section }: Props) {
               <ImageUploader label="Mobile Responsive Banner" value={data.mobileBanner || ''} onChange={(v) => set('mobileBanner', v)} folder="kairos/banners" />
             </div>
           )}
-          {((page === 'pricing' && section !== 'pricing-list') || page === 'service') && (
+          {(section === 'founder-story' || (page === 'pricing' && section !== 'pricing-list') || page === 'service') && (
             <ImageUploader label="Featured Hero Image" value={data.heroImage || ''} onChange={(v) => set('heroImage', v)} folder="kairos/heroes" />
           )}
           {page === 'service' && (
@@ -470,7 +481,7 @@ export default function SectionEditor({ data: initial, page, section }: Props) {
       )}
 
       {/* ── SERVICE ITEMS ─────────────────────────────── */}
-      {section === 'services' && (
+      {(section === 'services' || section === 'about-services') && (
         <ServiceItemEditor items={data.serviceItems || []} onChange={(v) => set('serviceItems', v)} />
       )}
 
@@ -480,7 +491,7 @@ export default function SectionEditor({ data: initial, page, section }: Props) {
       )}
 
       {/* ── STATS ─────────────────────────────────────── */}
-      {section === 'why-choose-us' && (
+      {(section === 'why-choose-us' || section === 'about-stats') && (
         <StatsEditor stats={data.stats || []} onChange={(v) => set('stats', v)} />
       )}
 

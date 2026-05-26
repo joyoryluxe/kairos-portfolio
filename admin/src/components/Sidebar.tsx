@@ -1,14 +1,16 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import { useParams } from 'next/navigation';
+import { useSearchParams, usePathname, useRouter } from 'next/navigation';
 import { getPages, getPageSections, SectionDoc } from '@/lib/api';
+import { useAuth } from '@/lib/AuthContext';
 import Link from 'next/link';
 
 const PAGE_ICONS: Record<string, string> = {
   home: '🏠',
   pricing: '💰',
   service: '📸',
+  about: '💡',
   other: '📄',
 };
 
@@ -18,9 +20,16 @@ interface SidebarProps {
 }
 
 export default function Sidebar({ isOpen, onClose }: SidebarProps) {
-  const params = useParams<{ page: string; section: string }>();
+  const searchParams = useSearchParams();
+  const pathname = usePathname();
+  const router = useRouter();
+  const { user, logout } = useAuth();
+
+  const currentPage = searchParams.get('page');
+  const currentSection = searchParams.get('section');
   const [pagesMap, setPagesMap] = useState<Record<string, SectionDoc[]>>({});
   const [loading, setLoading] = useState(true);
+  const [showProfile, setShowProfile] = useState(false);
 
   useEffect(() => {
     async function load() {
@@ -42,6 +51,11 @@ export default function Sidebar({ isOpen, onClose }: SidebarProps) {
     load();
   }, []);
 
+  const handleLogout = () => {
+    logout();
+    router.replace('/auth/login');
+  };
+
   return (
     <aside className={`sidebar ${isOpen ? 'open' : ''}`}>
       <div className="sidebar-logo">
@@ -51,7 +65,7 @@ export default function Sidebar({ isOpen, onClose }: SidebarProps) {
 
       <nav className="sidebar-nav">
         <div className="page-group">
-          <Link href="/sections" className={`section-link ${!params?.page ? 'active' : ''}`} onClick={onClose} style={{ marginBottom: '12px' }}>
+          <Link href="/sections" className={`section-link ${pathname === '/sections' ? 'active' : ''}`} onClick={onClose} style={{ marginBottom: '12px' }}>
             <span style={{ marginRight: '8px' }}>📊</span> Dashboard
           </Link>
         </div>
@@ -69,11 +83,11 @@ export default function Sidebar({ isOpen, onClose }: SidebarProps) {
                 {page}
               </div>
               {sections.map((s) => {
-                const isActive = params?.page === page && params?.section === s.section;
+                const isActive = currentPage === page && currentSection === s.section;
                 return (
                   <Link
                     key={s.section}
-                    href={`/sections/${page}/${s.section}`}
+                    href={`/sections/edit?page=${encodeURIComponent(page)}&section=${encodeURIComponent(s.section)}`}
                     className={`section-link ${isActive ? 'active' : ''}`}
                     onClick={onClose}
                   >
@@ -86,6 +100,42 @@ export default function Sidebar({ isOpen, onClose }: SidebarProps) {
           ))
         )}
       </nav>
+
+      {/* ── Profile & Logout Footer ───────────────────────── */}
+      <div className="sidebar-footer">
+        {/* Profile Card */}
+        <div
+          className="sidebar-profile"
+          onClick={() => setShowProfile(!showProfile)}
+          role="button"
+          tabIndex={0}
+          onKeyDown={(e) => e.key === 'Enter' && setShowProfile(!showProfile)}
+          aria-expanded={showProfile}
+        >
+          <div className="sidebar-avatar">
+            {user?.username?.[0]?.toUpperCase() || 'A'}
+          </div>
+          <div className="sidebar-profile-info">
+            <span className="sidebar-profile-name">{user?.username || 'Admin'}</span>
+            <span className="sidebar-profile-email">{user?.email || ''}</span>
+          </div>
+          <span className={`sidebar-profile-caret ${showProfile ? 'open' : ''}`}>›</span>
+        </div>
+
+        {/* Expandable actions */}
+        {showProfile && (
+          <div className="sidebar-actions">
+            <div className="sidebar-role-badge">
+              <span className="role-dot" />
+              {user?.role || 'admin'}
+            </div>
+            <button className="sidebar-action-btn logout-btn" onClick={handleLogout}>
+              <span>🚪</span>
+              Sign Out
+            </button>
+          </div>
+        )}
+      </div>
     </aside>
   );
 }

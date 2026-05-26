@@ -3,6 +3,7 @@ import './Hero.css';
 import { getAssetPath } from '../utils/assetPath';
 import ScrollReveal from './ScrollReveal';
 import { useSection } from '../hooks/useSection';
+import Loader from './Loader';
 
 // Fallback data (used while loading or if backend is unreachable)
 import landingData from '../data/landingData.json';
@@ -13,6 +14,10 @@ interface HeroProps {
 
 const Hero: React.FC<HeroProps> = ({ onBookNow }) => {
   const { data, loading } = useSection('home', 'hero');
+
+  if (loading) {
+    return <Loader text="Loading Kairos Experience" />;
+  }
 
   // Use backend data when available, fallback to local JSON
   const hero = {

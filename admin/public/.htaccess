@@ -1,0 +1,29 @@
+<IfModule mod_rewrite.c>
+  Options +FollowSymLinks -Indexes
+  RewriteEngine On
+
+  RewriteBase /admin_kairos/
+  
+  # Redirect the base admin folder directly to the sections dashboard in production
+  RewriteRule ^$ sections/ [R=301,L]
+  RewriteRule ^index\.html$ sections/ [R=301,L]
+
+  # 1. Fix 403 Forbidden: Ensure index.html is the default file for directories
+  DirectoryIndex index.html
+
+  # 2. If the request is for an actual file that exists, serve it directly
+  RewriteCond %{REQUEST_FILENAME} -f
+  RewriteRule ^ - [L]
+
+  # 3. If it's a directory and has an index.html, serve that index.html
+  # This specifically fixes the 403 Forbidden on folders like /sections/
+  RewriteCond %{REQUEST_FILENAME} -d
+  RewriteCond %{REQUEST_FILENAME}/index.html -f
+  RewriteRule ^(.*)$ $1/index.html [L]
+
+  # 4. Handle refreshing pages (SPA mode)
+  # If the path doesn't exist as a file or directory, fallback to index.html
+  RewriteCond %{REQUEST_FILENAME} !-f
+  RewriteCond %{REQUEST_FILENAME} !-d
+  RewriteRule ^ index.html [L]
+</IfModule>
