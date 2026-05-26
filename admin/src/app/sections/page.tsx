@@ -9,6 +9,27 @@ export default function SectionsPage() {
         <h1>Welcome to Kairos Admin</h1>
         <p>Your studio's digital engine. Select a page section from the sidebar to begin refining your content.</p>
 
+        <div style={{ marginBottom: '40px' }}>
+          <a
+            href="https://crm.kairosstudio.in/gallary/kairos-portal-a8f3k/login/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="btn btn-primary"
+            style={{
+              fontSize: '15px',
+              padding: '14px 32px',
+              textDecoration: 'none',
+              borderRadius: 'var(--radius-md)',
+              fontWeight: 600,
+              display: 'inline-flex',
+              alignItems: 'center',
+              gap: '10px'
+            }}
+          >
+            <span>🖼️</span> Go to Gallery
+          </a>
+        </div>
+
         <div className="quick-tips">
           <div className="tip">
             <span className="tip-dot"></span>

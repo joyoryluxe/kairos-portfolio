@@ -65,9 +65,24 @@ export default function Sidebar({ isOpen, onClose }: SidebarProps) {
 
       <nav className="sidebar-nav">
         <div className="page-group">
-          <Link href="/sections" className={`section-link ${pathname === '/sections' ? 'active' : ''}`} onClick={onClose} style={{ marginBottom: '12px' }}>
+          <Link href="/sections" className={`section-link ${pathname === '/sections' ? 'active' : ''}`} onClick={onClose} style={{ marginBottom: '6px' }}>
             <span style={{ marginRight: '8px' }}>📊</span> Dashboard
           </Link>
+          <a
+            href="https://crm.kairosstudio.in/gallary/kairos-portal-a8f3k/login/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="section-link"
+            onClick={onClose}
+            style={{
+              marginBottom: '12px',
+              border: '1px solid rgba(59, 130, 246, 0.3)',
+              background: 'rgba(59, 130, 246, 0.05)',
+              color: 'var(--accent-light)',
+            }}
+          >
+            <span style={{ marginRight: '8px' }}>🖼️</span> Go to Gallery
+          </a>
         </div>
         {loading ? (
           <div className="sidebar-loading">
