@@ -1,6 +1,17 @@
 // src/lib/api.ts  – All API calls to the Express backend
 
-export const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000';
+const getApiUrl = () => {
+  if (typeof window !== 'undefined') {
+    const hostname = window.location.hostname;
+    // In production/remote environments, use the Render production backend URL
+    if (hostname !== 'localhost' && hostname !== '127.0.0.1' && !hostname.startsWith('192.168.')) {
+      return 'https://kairos-portfolio-xsdp.onrender.com';
+    }
+  }
+  return process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000';
+};
+
+export const API_URL = getApiUrl();
 
 export interface SectionDoc {
   _id?: string;
