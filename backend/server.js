@@ -39,9 +39,9 @@ app.get('/health', (req, res) => {
 });
 
 // Routes
-app.use('/api/sections', sectionRoutes);
-app.use('/api/upload',   uploadRoutes);
-app.use('/api/auth',     authRoutes);
+app.use('/api/sections',sectionRoutes);
+app.use('/api/upload',uploadRoutes);
+app.use('/api/auth',authRoutes);
 
 // Database connection
 mongoose.connect(process.env.MONGO_URI)
