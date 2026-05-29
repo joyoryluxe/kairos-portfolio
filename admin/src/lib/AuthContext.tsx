@@ -19,6 +19,7 @@ interface AuthContextValue {
   logout: () => void;
   forgotPassword: (email: string) => Promise<string>;
   resetPassword: (token: string, newPassword: string) => Promise<void>;
+  updatePassword: (email: string, oldPassword: string, newPassword: string) => Promise<string>;
 }
 
 const AuthContext = createContext<AuthContextValue | null>(null);
@@ -97,8 +98,19 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     persist(data.token, data.user);
   };
 
+  const updatePassword = async (email: string, oldPassword: string, newPassword: string): Promise<string> => {
+    const res = await fetch(`${API_URL}/api/auth/update-password`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ email, oldPassword, newPassword }),
+    });
+    const data = await res.json();
+    if (!res.ok) throw new Error(data.message || 'Update failed.');
+    return data.message;
+  };
+
   return (
-    <AuthContext.Provider value={{ user, token, loading, login, signup, logout, forgotPassword, resetPassword }}>
+    <AuthContext.Provider value={{ user, token, loading, login, signup, logout, forgotPassword, resetPassword, updatePassword }}>
       {children}
     </AuthContext.Provider>
   );

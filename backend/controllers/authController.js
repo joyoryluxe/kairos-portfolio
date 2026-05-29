@@ -152,3 +152,35 @@ exports.resetPassword = async (req, res) => {
     res.status(500).json({ message: 'Server error.' });
   }
 };
+
+// ── UPDATE PASSWORD (Direct change) ───────────────────
+exports.updatePassword = async (req, res) => {
+  try {
+    const { email, oldPassword, newPassword } = req.body;
+    
+    if (!email || !oldPassword || !newPassword) {
+      return res.status(400).json({ message: 'Email, old password, and new password are required.' });
+    }
+    if (newPassword.length < 6) {
+      return res.status(400).json({ message: 'New password must be at least 6 characters.' });
+    }
+
+    const user = await User.findOne({ email });
+    if (!user) {
+      return res.status(401).json({ message: 'Invalid email or old password.' });
+    }
+
+    const isMatch = await user.comparePassword(oldPassword);
+    if (!isMatch) {
+      return res.status(401).json({ message: 'Invalid email or old password.' });
+    }
+
+    user.password = newPassword;
+    await user.save();
+
+    res.status(200).json({ message: 'Password updated successfully. You can now login with your new password.' });
+  } catch (err) {
+    console.error('Update password error:', err);
+    res.status(500).json({ message: 'Server error.' });
+  }
+};
