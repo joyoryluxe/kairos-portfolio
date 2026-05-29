@@ -74,3 +74,44 @@ export async function deleteSection(page: string, section: string): Promise<void
   const res = await fetch(`${API_URL}/api/sections/${page}/${section}`, { method: 'DELETE' });
   if (!res.ok) throw new Error('Failed to delete');
 }
+
+// ─── Cloudinary Usage ────────────────────────────────────────────────────────
+
+export interface CloudinaryStorageStat {
+  usedBytes: number;
+  limitBytes: number;
+  usedGB: number;
+  limitGB: number | null;   // null on Free plan (no hard limit)
+  creditsUsage?: number;
+  percentage: number;
+}
+
+export interface CloudinaryUsage {
+  plan: string;
+  storage: CloudinaryStorageStat;
+  bandwidth: CloudinaryStorageStat;
+  transformations: {
+    used: number;
+    limit: number;
+    creditsUsage?: number;
+    percentage: number;
+  };
+  objects: number;
+  resources?: number;
+  derived?: number;
+  requests: number;
+  impressions?: number;
+  credits: { used: number; limit: number; percent: number };
+  fetchedAt: string;
+}
+
+/**
+ * Fetches real Cloudinary usage data from the backend Admin API route.
+ * The API secret is NEVER exposed to the browser — this is backend-only.
+ */
+export async function getCloudinaryUsage(): Promise<CloudinaryUsage> {
+  const res = await fetch(`${API_URL}/api/admin/cloudinary/usage`);
+  if (!res.ok) throw new Error('Failed to fetch Cloudinary usage');
+  const json = await res.json();
+  return json.data as CloudinaryUsage;
+}

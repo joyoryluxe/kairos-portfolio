@@ -50,13 +50,15 @@ function MultiImageUploader({
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: 20 }}>
       {images.map((img, i) => (
-        <div key={i} style={{ position: 'relative' }}>
+        <div key={i} className="nested-card">
+          <div className="nested-card-header">
+            <span>Asset {i + 1}</span>
+            <button
+              className="btn btn-danger btn-sm btn-icon"
+              onClick={() => remove(i)}
+            >✕</button>
+          </div>
           <ImageUploader value={img} onChange={(url) => update(i, url)} folder={folder} />
-          <button
-            className="btn btn-danger btn-sm btn-icon"
-            style={{ position: 'absolute', top: 10, right: 10, zIndex: 10 }}
-            onClick={() => remove(i)}
-          >✕</button>
         </div>
       ))}
       <button className="add-btn" onClick={addBlank}>+ Add Image Asset</button>
@@ -66,10 +68,11 @@ function MultiImageUploader({
 
 // ─── Array editors ───────────────────────────────────────────────────────────
 function ServiceItemEditor({
-  items, onChange,
+  items, onChange, hideImage = false
 }: {
   items: { id: number; title: string; image: string; description?: string }[];
   onChange: (items: { id: number; title: string; image: string; description?: string }[]) => void;
+  hideImage?: boolean;
 }) {
   const add = () => onChange([...items, { id: Date.now(), title: '', image: '', description: '' }]);
   const remove = (i: number) => onChange(items.filter((_, idx) => idx !== i));
@@ -89,8 +92,7 @@ function ServiceItemEditor({
               <button className="btn btn-danger btn-sm" onClick={() => remove(i)}>✕</button>
             </div>
             <TextInput label="Service Title" value={item.title} onChange={(val) => update(i, 'title', val)} />
-            <TextArea label="Description" value={item.description || ''} onChange={(val) => update(i, 'description', val)} />
-            <ImageUploader label="Service Image" value={item.image} onChange={(url) => update(i, 'image', url)} folder="kairos/services" />
+            {!hideImage && <ImageUploader label="Service Image" value={item.image} onChange={(url) => update(i, 'image', url)} folder="kairos/services" />}
           </div>
         ))}
       </div>
@@ -117,13 +119,15 @@ function BestShotEditor({
       <div className="card-title">Gallery Collection</div>
       <div className="visual-grid">
         {items.map((item, i) => (
-          <div key={i} style={{ position: 'relative' }} className="visual-grid-item">
-            <ImageUploader label={`Photo Asset ${i + 1}`} value={item.image} onChange={(url) => update(i, url)} folder="kairos/best-shots" />
-            <button
-              className="btn btn-danger btn-sm btn-icon"
-              style={{ position: 'absolute', top: 10, right: 10, zIndex: 10 }}
-              onClick={() => remove(i)}
-            >✕</button>
+          <div key={i} className="nested-card visual-grid-item">
+            <div className="nested-card-header">
+              <span>Photo Asset {i + 1}</span>
+              <button
+                className="btn btn-danger btn-sm btn-icon"
+                onClick={() => remove(i)}
+              >✕</button>
+            </div>
+            <ImageUploader value={item.image} onChange={(url) => update(i, url)} folder="kairos/best-shots" />
           </div>
         ))}
       </div>
@@ -444,22 +448,24 @@ export default function SectionEditor({ data: initial, page, section }: Props) {
       </div>
 
       {/* ── BASIC INFO ───────────────────────────────── */}
-      <div className="card">
-        <div className="card-title">Core Content</div>
-        <TextInput label="Main Title" value={data.title || ''} onChange={(v) => set('title', v)} />
-        {(section === 'hero' || section === 'about-intro' || (page === 'pricing' && section !== 'pricing-list')) && (
-          <TextInput label="Sub-heading" value={data.subtitle || ''} onChange={(v) => set('subtitle', v)} />
-        )}
-        {(section === 'about-intro' || section === 'founder-story' || (page === 'pricing' && section !== 'pricing-list') || page === 'service') && (
-          <TextArea label="Long Description" value={data.description || ''} onChange={(v) => set('description', v)} />
-        )}
-        {section === 'hero' && (
-          <TextInput label="Social Tagline / Hashtag" value={data.hashtag || ''} onChange={(v) => set('hashtag', v)} />
-        )}
-        {section === 'about-intro' && (
-          <TextArea label="Studio Detail" value={data.extra?.studioDetail as string || ''} onChange={(v) => setExtra('studioDetail', v)} />
-        )}
-      </div>
+      {(section !== 'about-services' && section !== 'about-stats') && (
+        <div className="card">
+          <div className="card-title">Core Content</div>
+          <TextInput label="Main Title" value={data.title || ''} onChange={(v) => set('title', v)} />
+          {(section === 'hero' || section === 'about-intro' || (page === 'pricing' && section !== 'pricing-list')) && (
+            <TextInput label="Sub-heading" value={data.subtitle || ''} onChange={(v) => set('subtitle', v)} />
+          )}
+          {(section === 'about-intro' || section === 'founder-story' || (page === 'pricing' && section !== 'pricing-list')) && (
+            <TextArea label="Long Description" value={data.description || ''} onChange={(v) => set('description', v)} />
+          )}
+          {section === 'hero' && (
+            <TextInput label="Social Tagline / Hashtag" value={data.hashtag || ''} onChange={(v) => set('hashtag', v)} />
+          )}
+          {section === 'about-intro' && (
+            <TextArea label="Studio Detail" value={data.extra?.studioDetail as string || ''} onChange={(v) => setExtra('studioDetail', v)} />
+          )}
+        </div>
+      )}
 
       {/* ── BANNER / HERO ─────────────────────────────── */}
       {(section === 'hero' || section === 'founder-story' || (page === 'pricing' && section !== 'pricing-list') || page === 'service') && (
@@ -482,7 +488,11 @@ export default function SectionEditor({ data: initial, page, section }: Props) {
 
       {/* ── SERVICE ITEMS ─────────────────────────────── */}
       {(section === 'services' || section === 'about-services') && (
-        <ServiceItemEditor items={data.serviceItems || []} onChange={(v) => set('serviceItems', v)} />
+        <ServiceItemEditor 
+          items={data.serviceItems || []} 
+          onChange={(v) => set('serviceItems', v)} 
+          hideImage={section === 'about-services'}
+        />
       )}
 
       {/* ── BEST SHOT ITEMS ───────────────────────────── */}

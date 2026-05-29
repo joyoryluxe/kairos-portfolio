@@ -58,9 +58,8 @@ export default function Sidebar({ isOpen, onClose }: SidebarProps) {
 
   return (
     <aside className={`sidebar ${isOpen ? 'open' : ''}`}>
-      <div className="sidebar-logo">
-        <h1>⚡ Kairos Admin</h1>
-        <p>Studio CMS</p>
+      <div className="sidebar-logo" style={{ padding: '24px 24px 16px' }}>
+        <img src="/admin_kairos/logo.png" alt="Kairos Admin" style={{ height: '40px', width: 'auto', objectFit: 'contain' }} />
       </div>
 
       <nav className="sidebar-nav">
@@ -97,7 +96,7 @@ export default function Sidebar({ isOpen, onClose }: SidebarProps) {
                 <span style={{ fontSize: '14px' }}>{PAGE_ICONS[page] || '📄'}</span>
                 {page}
               </div>
-              {sections.map((s) => {
+              {sections.filter(s => s.section !== 'connect').map((s) => {
                 const isActive = currentPage === page && currentSection === s.section;
                 return (
                   <Link

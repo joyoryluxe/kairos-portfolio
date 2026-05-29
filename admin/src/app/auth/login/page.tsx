@@ -42,12 +42,8 @@ export default function LoginPage() {
 
       <div className="auth-container">
         {/* Logo */}
-        <div className="auth-logo">
-          <div className="auth-logo-icon">⚡</div>
-          <div className="auth-logo-text">
-            <span className="auth-logo-brand">Kairos</span>
-            <span className="auth-logo-sub">Admin Panel</span>
-          </div>
+        <div className="auth-logo" style={{ display: 'flex', justifyContent: 'center' }}>
+          <img src="/admin_kairos/logo.png" alt="Kairos Admin" style={{ height: '48px', width: 'auto', objectFit: 'contain' }} />
         </div>
 
         <div className="auth-card">

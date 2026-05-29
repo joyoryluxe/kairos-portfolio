@@ -119,10 +119,10 @@ export default function ImageUploader({ value, onChange, folder = 'kairos', labe
         <div className="img-preview-wrap">
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img src={resolvePreviewUrl(value)} alt="preview" className="img-preview" />
-          <div className="img-preview-badges">
+          {/* <div className="img-preview-badges">
             {isCloudinary && <span className="badge badge-cloud">☁ Cloudinary</span>}
             {isLocal && <span className="badge badge-local">📁 Local path</span>}
-          </div>
+          </div> */}
         </div>
       )}
 
