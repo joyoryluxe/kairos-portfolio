@@ -52,6 +52,10 @@ interface NavbarProps {
     } else if (onServiceClick) {
       onServiceClick(id);
     }
+    // Automatically refresh the page
+    setTimeout(() => {
+      window.location.reload();
+    }, 50);
   };
 
   const half = Math.ceil(navLinks.length / 2);
