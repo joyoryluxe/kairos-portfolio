@@ -11,7 +11,7 @@ function resolvePreviewUrl(url: string): string {
   return `${FRONTEND_URL}${url.startsWith('/') ? '' : '/'}${url}`;
 }
 
-const compressImage = (file: File, maxWidth = 2560, quality = 0.85): Promise<Blob> => {
+const compressImage = (file: File, maxWidth = 2048, quality = 0.8): Promise<Blob> => {
   return new Promise((resolve, reject) => {
     if (file.type === 'image/gif') {
       resolve(file);
@@ -79,8 +79,34 @@ export default function ImageUploader({ value, onChange, folder = 'kairos', labe
     setError('');
 
     try {
-      // Compress the image on the client-side to high-quality WebP first
-      const compressedBlob = await compressImage(file);
+      // 1. Initial compression: Max width 2048px, 80% quality WebP
+      let compressedBlob = await compressImage(file, 2048, 0.8);
+
+      // Fallback: If the compressed WebP is larger than the original image,
+      // and the original image is under Cloudinary's 10MB limit, keep the original image instead.
+      if (file.size < compressedBlob.size && file.size <= 10 * 1024 * 1024) {
+        compressedBlob = file;
+      }
+
+      // 2. Second pass: If still larger than Cloudinary's 10MB limit, compress more aggressively (1600px, 75% quality)
+      if (compressedBlob.size > 10 * 1024 * 1024 && file.type !== 'image/gif') {
+        compressedBlob = await compressImage(file, 1600, 0.75);
+      }
+
+      // 3. Third pass: If STILL larger than 10MB, reduce resolution further (1200px, 70% quality)
+      if (compressedBlob.size > 10 * 1024 * 1024 && file.type !== 'image/gif') {
+        compressedBlob = await compressImage(file, 1200, 0.7);
+      }
+
+      // 4. Hard safety check: If the final blob size is still above 10MB (or if it's a GIF that can't be compressed),
+      // reject it early so we don't hit the Cloudinary limit error.
+      if (compressedBlob.size > 10 * 1024 * 1024) {
+        const sizeInMB = (compressedBlob.size / (1024 * 1024)).toFixed(2);
+        throw new Error(
+          `Image is too large (${sizeInMB} MB). Cloudinary's free plan limit is 10 MB. Please upload a smaller image.`
+        );
+      }
+
       const fileExtension = file.type === 'image/gif' ? '.gif' : '.webp';
       const newFileName = file.name.replace(/\.[^/.]+$/, "") + fileExtension;
       const fileToUpload = new File([compressedBlob], newFileName, {
