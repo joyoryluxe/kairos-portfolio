@@ -142,8 +142,7 @@ const Services: React.FC<ServicesProps> = ({ onServiceClick }) => {
                   ? `translateX(calc(-${currentIndex * (100 / cardsToShow)}% + ${dragOffset}px))`
                   : 'none',
                 flexWrap: isSlider ? 'nowrap' : 'wrap',
-                transition: isDragging ? 'none' : 'transform 0.5s cubic-bezier(0.16, 1, 0.3, 1)',
-                pointerEvents: isDragging ? 'none' : 'auto'
+                transition: isDragging ? 'none' : 'transform 0.5s cubic-bezier(0.16, 1, 0.3, 1)'
               }}
             >
               {items.map((item, index) => (
