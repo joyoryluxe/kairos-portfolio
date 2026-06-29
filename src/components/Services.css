@@ -22,6 +22,7 @@
   overflow: hidden;
   position: relative;
   padding: 1rem 0;
+  touch-action: pan-y;
   /* Space for box-shadow on hover */
 }
 

@@ -23,6 +23,10 @@
   text-align: left;
 }
 
+.connect-br {
+  display: block;
+}
+
 .connect-right {
   display: flex;
   flex-direction: column;
@@ -86,25 +90,57 @@
 }
 
 @media (max-width: 768px) {
+  .connect-section {
+    padding: 50px 0;
+  }
+
   .connect-container {
     flex-direction: column;
-    gap: 3rem;
+    gap: 1.5rem;
     align-items: flex-start;
+  }
+
+  .connect-br {
+    display: none;
   }
 
   .connect-right {
     align-items: flex-start;
     text-align: left;
+    margin-top: 0;
   }
 
   .connect-title {
-    font-size: 4rem;
+    font-size: 2.2rem;
+  }
+
+  .contact-info {
+    margin-bottom: 1.2rem;
   }
 
   .contact-phone,
-  .contact-email,
+  .contact-email {
+    font-size: 1.3rem;
+  }
+
+  .contact-email {
+    text-underline-offset: 4px;
+  }
+
   .contact-address p {
-    font-size: 1.4rem;
+    font-size: 1.1rem;
+  }
+
+  .booking-cta-wrapper {
+    margin-top: 1.8rem;
+    width: 100%;
+  }
+
+  .booking-cta-button {
+    width: 100%;
+    justify-content: space-between;
+    padding: 0.8rem 1.2rem;
+    font-size: 1rem;
   }
 }
 
@@ -178,17 +214,4 @@
 
 .booking-cta-button:hover .arrow-icon {
   transform: translateX(8px);
-}
-
-@media (max-width: 768px) {
-  .booking-cta-wrapper {
-    margin-top: 2.5rem;
-    width: 100%;
-  }
-
-  .booking-cta-button {
-    width: 100%;
-    justify-content: space-between;
-    padding: 1rem 1.5rem;
-  }
 }

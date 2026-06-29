@@ -106,7 +106,7 @@
    SECTION 2: FOUNDER'S STORY
 ──────────────────────────────── */
 .founder-story-section {
-  padding: 50px 0 0;
+  padding: 60px 0 0;
   position: relative;
   overflow: visible;
 }
@@ -185,7 +185,7 @@
 .founder-image-side {
   position: absolute;
   right: 60px;
-  bottom: 0;
+  bottom: -20px;
   width: 500px;
   /* Wider for the portrait */
   overflow: visible;
@@ -417,8 +417,40 @@
 }
 
 @media (max-width: 768px) {
+  .about-sessions-section {
+    padding: 50px 0 60px;
+  }
+
+  .sessions-header {
+    margin-bottom: 30px;
+  }
+
+  .sessions-title {
+    font-size: 18px;
+    letter-spacing: 2px;
+    margin-bottom: 10px;
+  }
+
   .sessions-grid {
-    grid-template-columns: 1fr;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+    padding: 0 10px;
+  }
+
+  .session-card {
+    padding: 24px 16px;
+    border-radius: 8px;
+  }
+
+  .session-card-title {
+    font-size: 15px;
+    margin-bottom: 10px;
+    line-height: 1.3;
+  }
+
+  .session-card-subtitle {
+    font-size: 11px;
+    line-height: 1.4;
   }
 
   .about-hero-section {
@@ -460,12 +492,36 @@
   }
 
   .stat-line-divider {
-    display: none;
+    display: block;
+    width: 2px;
+    height: 30px;
+    background: #ece9e2;
+    border-radius: 1px;
+    margin: 0 10px;
+  }
+
+  .about-stats-strip {
+    padding: 30px 0;
   }
 
   .stats-flex {
-    flex-direction: column;
-    gap: 50px;
+    flex-direction: row;
+    justify-content: space-around;
+    gap: 15px;
+  }
+
+  .stat-number {
+    font-size: 32px;
+    margin-bottom: 4px;
+  }
+
+  .stat-label {
+    font-size: 11px;
+    line-height: 1.3;
+  }
+
+  .founder-story-section {
+    padding: 20px 0 0;
   }
 
   .founder-grid {
@@ -473,17 +529,31 @@
   }
 
   .founder-text-side {
-    max-width: 60%;
+    max-width: 65%;
+  }
+
+  .founder-title {
+    font-size: 20px;
+    line-height: 1.4;
+    text-align: left;
+  }
+
+  .founder-header {
+    text-align: left;
+  }
+
+  .founder-header .title-underline {
+    margin: 0;
   }
 
   .founder-quote {
-    font-size: 6px;
-    line-height: 1.5;
+    font-size: 7px;
+    line-height: 1.3;
   }
 
   .founder-image-side {
     right: 0px;
-    width: 65%;
+    width: 45%;
   }
 
   .founder-portrait {

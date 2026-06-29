@@ -4,9 +4,9 @@ const mongoose = require('mongoose');
 const cors = require('cors');
 const path = require('path');
 
-const sectionRoutes    = require('./routes/sectionRoutes');
-const uploadRoutes     = require('./routes/uploadRoutes');
-const authRoutes       = require('./routes/authRoutes');
+const sectionRoutes = require('./routes/sectionRoutes');
+const uploadRoutes = require('./routes/uploadRoutes');
+const authRoutes = require('./routes/authRoutes');
 const cloudinaryRoutes = require('./routes/cloudinaryRoutes');
 
 const app = express();
@@ -15,9 +15,11 @@ const PORT = process.env.PORT || 5000;
 // Middleware
 const allowedOrigins = [
   'https://kairosstudio.in',
+  'https://www.kairosstudio.in',
   'http://localhost:5173',
   'http://localhost:3000',
-  'https://kairos-portfolio-xsdp.onrender.com'
+  'https://kairos-portfolio-xsdp.onrender.com',
+  'http://192.168.1.5:5173/'
 ];
 
 app.use(cors({
@@ -41,8 +43,8 @@ app.get('/health', (req, res) => {
 
 // Routes
 app.use('/api/sections', sectionRoutes);
-app.use('/api/upload',   uploadRoutes);
-app.use('/api/auth',     authRoutes);
+app.use('/api/upload', uploadRoutes);
+app.use('/api/auth', authRoutes);
 app.use('/api/admin/cloudinary', cloudinaryRoutes);
 
 // Database connection

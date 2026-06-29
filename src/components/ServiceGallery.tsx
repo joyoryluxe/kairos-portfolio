@@ -22,6 +22,38 @@ const ServiceGallery: React.FC = () => {
   const [zoomLevel, setZoomLevel] = useState(1);
   const [isFullscreen, setIsFullscreen] = useState(false);
 
+  // Swipe logic for the fullscreen viewer
+  const [touchStartX, setTouchStartX] = useState<number | null>(null);
+  const [touchDeltaX, setTouchDeltaX] = useState<number>(0);
+  const [isSwiping, setIsSwiping] = useState(false);
+
+  const handleSwipeStart = (clientX: number) => {
+    if (zoomLevel > 1) return;
+    setTouchStartX(clientX);
+    setTouchDeltaX(0);
+    setIsSwiping(true);
+  };
+
+  const handleSwipeMove = (clientX: number) => {
+    if (!isSwiping || touchStartX === null) return;
+    const diff = clientX - touchStartX;
+    setTouchDeltaX(diff);
+  };
+
+  const handleSwipeEnd = () => {
+    if (!isSwiping) return;
+    setIsSwiping(false);
+
+    if (touchDeltaX < -80) {
+      nextImage();
+    } else if (touchDeltaX > 80) {
+      prevImage();
+    }
+
+    setTouchStartX(null);
+    setTouchDeltaX(0);
+  };
+
   const openViewer = (index: number) => {
     setSelectedIndex(index);
     setZoomLevel(1);
@@ -98,7 +130,7 @@ const ServiceGallery: React.FC = () => {
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
             <path d="M19 12H5M12 19l-7-7 7-7" />
           </svg>
-          Back to Service
+          <span>Back to Service</span>
         </button>
         <div className="gallery-title-wrapper">
           <h1>
@@ -159,7 +191,26 @@ const ServiceGallery: React.FC = () => {
               </svg>
             </button>
 
-            <div className="viewer-image-container" onClick={(e) => e.stopPropagation()}>
+            <div
+              className="viewer-image-container"
+              onClick={(e) => e.stopPropagation()}
+              onMouseDown={(e) => handleSwipeStart(e.clientX)}
+              onMouseMove={(e) => {
+                if (isSwiping) {
+                  e.preventDefault();
+                  handleSwipeMove(e.clientX);
+                }
+              }}
+              onMouseUp={handleSwipeEnd}
+              onMouseLeave={handleSwipeEnd}
+              onTouchStart={(e) => handleSwipeStart(e.touches[0].clientX)}
+              onTouchMove={(e) => handleSwipeMove(e.touches[0].clientX)}
+              onTouchEnd={handleSwipeEnd}
+              style={{
+                touchAction: zoomLevel === 1 ? 'pan-y' : 'auto',
+                overflow: zoomLevel === 1 ? 'hidden' : 'auto'
+              }}
+            >
               <img
                 src={getAssetPath(images[selectedIndex])}
                 alt={`${section.title} full view`}
@@ -167,9 +218,10 @@ const ServiceGallery: React.FC = () => {
                 style={{
                   maxWidth: zoomLevel === 1 ? '100%' : `${zoomLevel * 100}%`,
                   maxHeight: zoomLevel === 1 ? '100%' : `${zoomLevel * 100}%`,
-                  cursor: zoomLevel > 1 ? 'zoom-out' : 'zoom-in'
+                  cursor: 'default',
+                  transform: isSwiping && zoomLevel === 1 ? `translateX(${touchDeltaX}px)` : 'none',
+                  transition: isSwiping ? 'none' : 'transform 0.4s cubic-bezier(0.16, 1, 0.3, 1)'
                 }}
-                onClick={() => zoomLevel > 1 ? setZoomLevel(1) : setZoomLevel(2)}
               />
             </div>
 

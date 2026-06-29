@@ -15,7 +15,7 @@ const Connect: React.FC<ConnectProps> = ({ onBookNow }) => {
     <section className="connect-section">
       <div className="container connect-container">
         <div className="connect-left">
-          <h2 className="connect-title">Let's<br />Connect</h2>
+          <h2 className="connect-title">Let's <br className="connect-br" />Connect</h2>
         </div>
 
         <div className="connect-right">

@@ -16,6 +16,38 @@ const BestShots: React.FC = () => {
   const [zoomLevel, setZoomLevel] = useState(1);
   const [isFullscreen, setIsFullscreen] = useState(false);
 
+  // Swipe logic for the fullscreen viewer
+  const [touchStartX, setTouchStartX] = useState<number | null>(null);
+  const [touchDeltaX, setTouchDeltaX] = useState<number>(0);
+  const [isSwiping, setIsSwiping] = useState(false);
+
+  const handleSwipeStart = (clientX: number) => {
+    if (zoomLevel > 1) return;
+    setTouchStartX(clientX);
+    setTouchDeltaX(0);
+    setIsSwiping(true);
+  };
+
+  const handleSwipeMove = (clientX: number) => {
+    if (!isSwiping || touchStartX === null) return;
+    const diff = clientX - touchStartX;
+    setTouchDeltaX(diff);
+  };
+
+  const handleSwipeEnd = () => {
+    if (!isSwiping) return;
+    setIsSwiping(false);
+
+    if (touchDeltaX < -80) {
+      nextImage();
+    } else if (touchDeltaX > 80) {
+      prevImage();
+    }
+
+    setTouchStartX(null);
+    setTouchDeltaX(0);
+  };
+
   const title = apiData?.title || landingData.bestShots.title;
   const items = (apiData?.bestShotItems && apiData.bestShotItems.length > 0)
     ? apiData.bestShotItems
@@ -165,7 +197,26 @@ const BestShots: React.FC = () => {
               </svg>
             </button>
 
-            <div className="viewer-image-container" onClick={(e) => e.stopPropagation()}>
+            <div
+              className="viewer-image-container"
+              onClick={(e) => e.stopPropagation()}
+              onMouseDown={(e) => handleSwipeStart(e.clientX)}
+              onMouseMove={(e) => {
+                if (isSwiping) {
+                  e.preventDefault();
+                  handleSwipeMove(e.clientX);
+                }
+              }}
+              onMouseUp={handleSwipeEnd}
+              onMouseLeave={handleSwipeEnd}
+              onTouchStart={(e) => handleSwipeStart(e.touches[0].clientX)}
+              onTouchMove={(e) => handleSwipeMove(e.touches[0].clientX)}
+              onTouchEnd={handleSwipeEnd}
+              style={{
+                touchAction: zoomLevel === 1 ? 'pan-y' : 'auto',
+                overflow: zoomLevel === 1 ? 'hidden' : 'auto'
+              }}
+            >
               <img
                 src={getAssetPath(items[selectedIndex].image)}
                 alt={`Best shot ${items[selectedIndex].id} full view`}
@@ -173,9 +224,10 @@ const BestShots: React.FC = () => {
                 style={{
                   maxWidth: zoomLevel === 1 ? '100%' : `${zoomLevel * 100}%`,
                   maxHeight: zoomLevel === 1 ? '100%' : `${zoomLevel * 100}%`,
-                  cursor: zoomLevel > 1 ? 'zoom-out' : 'zoom-in'
+                  cursor: 'default',
+                  transform: isSwiping && zoomLevel === 1 ? `translateX(${touchDeltaX}px)` : 'none',
+                  transition: isSwiping ? 'none' : 'transform 0.4s cubic-bezier(0.16, 1, 0.3, 1)'
                 }}
-                onClick={() => zoomLevel > 1 ? setZoomLevel(1) : setZoomLevel(2)}
               />
             </div>
 
